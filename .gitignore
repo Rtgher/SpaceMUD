@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 SpaceMUD/nuget.config
 .svn/*
+/SpaceMUD.Server/nuget.config
