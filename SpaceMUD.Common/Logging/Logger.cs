@@ -8,7 +8,7 @@ using SpaceMUD.Common.Interfaces;
 
 namespace SpaceMUD.Common.Logging
 {
-    public class Logger : ILog
+    public class Logger : ILog, IDisposable
     {
         private StringBuilder _logBuffer;
         private readonly int MaxCharCount;
@@ -24,7 +24,7 @@ namespace SpaceMUD.Common.Logging
 
         public void LogError(string message, Exception exception)
         {
-            string log = $"[{time}]-[ERROR]:{message}\r\n[StackTrace]: {exception.StackTrace}";
+            string log = $"[{time}]-[ERROR]:{message}\r\n[Exception Message]:{exception.Message}\r\n[StackTrace]: {exception.StackTrace}";
             Console.WriteLine(log);
             _logBuffer.AppendLine(log);
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
@@ -50,6 +50,11 @@ namespace SpaceMUD.Common.Logging
         {
             using (StreamWriter file = new StreamWriter(_logSavePath + "/gamelog.txt", append: true)) file.WriteLine(LogBuffer.ToString());
             _logBuffer.Clear();
+        }
+
+        void IDisposable.Dispose()
+        {
+            PurgeLog();
         }
     }
 }
