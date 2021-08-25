@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceMUD.Base.Interface.Connection
+namespace SpaceMUD.Server.Base.Interface.Connection
 {
     /// <summary>
     /// Server-side object wrapping the client connection.

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceMUD.Base.Interface
+namespace SpaceMUD.Server.Base.Interface
 {
     /// <summary>
     /// An interface to detail a basic server.
     /// </summary>
-    interface IServer
+    public interface IServer
     {
         /// <summary>
         /// Start the server for connection on the given port number.
