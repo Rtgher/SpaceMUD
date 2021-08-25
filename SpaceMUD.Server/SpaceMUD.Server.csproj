@@ -46,6 +46,7 @@
     <Compile Include="Base\Interface\IServer.cs" />
     <Compile Include="Base\Interface\Connection\ISocketConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Connection\SocketConnectionHandler.cs" />
     <Compile Include="Server\TelnetSocketServer.cs" />
   </ItemGroup>
   <ItemGroup>
