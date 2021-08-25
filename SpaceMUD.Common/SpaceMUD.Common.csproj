@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
+    <Compile Include="Exceptions\MUDException.cs" />
+    <Compile Include="Exceptions\Server\ServerFlowException.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Logging\Logger.cs" />
