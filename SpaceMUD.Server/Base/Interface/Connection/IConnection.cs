@@ -11,10 +11,11 @@ namespace SpaceMUD.Server.Base.Interface.Connection
     /// </summary>
     public interface IConnection
     {
-        IConnection OnConnect();
-        IConnection OnDisconnect();
-        IConnection Disconnect();
-        IConnection OnUpdate();
+        bool IsRunning { get; set; }
+        void OnConnect();
+        void OnDisconnect();
+        void Disconnect();
+        void OnUpdate();
 
     }
 }

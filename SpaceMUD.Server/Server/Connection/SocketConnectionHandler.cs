@@ -4,30 +4,48 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using SpaceMUD.Server.Base.Interface.Connection;
+using SpaceMUD.Common.Exceptions.Server;
 
 namespace SpaceMUD.Server.Connection
 {
     public class SocketConnectionHandler : ISocketConnection, IDisposable
     {
-        Socket ISocketConnection.ClientSocket => throw new NotImplementedException();
+        public Socket ClientSocket { get; private set; }
+        public bool IsRunning {
+            get => _isRunning;
+            set {
+                if (_isRunning = true)
+                {
+                    if (value == false) throw new ServerFlowException("Something tried to terminate a socket connection incorrectly. Correct way is through Disconnect()");
+                }
+                    _isRunning = value; }
+        }
+        private bool _isRunning;
+        public SocketConnectionHandler(Socket socket)
+        {
+            ClientSocket = socket;
+            Thread onConnectThread = new Thread(((IConnection) this).OnConnect);
+            onConnectThread.Start();
+        }
 
-        IConnection IConnection.Disconnect()
+        void IConnection.Disconnect()
         {
             throw new NotImplementedException();
         }
 
-        IConnection IConnection.OnConnect()
+        void IConnection.OnConnect()
         {
             throw new NotImplementedException();
         }
 
-        IConnection IConnection.OnDisconnect()
+        void IConnection.OnDisconnect()
         {
             throw new NotImplementedException();
         }
 
-        IConnection IConnection.OnUpdate()
+        void IConnection.OnUpdate()
         {
             throw new NotImplementedException();
         }
