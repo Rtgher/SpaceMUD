@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using SpaceMUD.Base.Interface;
+using SpaceMUD.Server.Base.Interface;
+using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Common.Interfaces;
-using SpaceMUD.Base.Interface.Connection;
 using SpaceMUD.Common.Logging;
 using SpaceMUD.Common.Tools;
 
@@ -30,8 +30,6 @@ namespace SpaceMUD.Server
             socket.Bind(new IPEndPoint(IPAddress.Any, portNumber));
             return socket;
         }
-        
-
 
         public TelnetSocketServer(IGame game, int portNumber=4000)
         {
@@ -66,6 +64,7 @@ namespace SpaceMUD.Server
         public void Stop()
         {
             throw new NotImplementedException();
+            Running = false;
         }
 
         public void Dispose()
