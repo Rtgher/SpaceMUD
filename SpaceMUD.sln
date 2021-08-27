@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Database", "SpaceM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Database.TESTS", "Tests\SpaceMUD.Database.TESTS\SpaceMUD.Database.TESTS.csproj", "{CEE50471-634B-4331-A445-BF0F666EE9BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Data", "SpaceMUD.Data\SpaceMUD.Data.csproj", "{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{CEE50471-634B-4331-A445-BF0F666EE9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEE50471-634B-4331-A445-BF0F666EE9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEE50471-634B-4331-A445-BF0F666EE9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
