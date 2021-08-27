@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using SpaceMUD.Common.Exceptions.Database;
 using SpaceMUD.Common.Tools;
 using SpaceMUD.Common.Tools.Extensions;
+using SpaceMUD.Data.Base.Interface;
 using SpaceMUD.Database.Repositor.Base.Interface;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,16 @@ namespace SpaceMUD.Database.Repositor.FileRepository
 {
     /// <summary>
     /// A simple file repository system. Holds all entities in their own json file within the same folder. Thus the Folder acts as the table, and the files as a row/entry.
+    /// Check IRepository for an overview of the methods functionality
     /// </summary>
     /// <typeparam name="T">The Entity type</typeparam>
-    public class FileRepository<T> : IRepository<T> where T : class
+    public class FileRepository<T> : IRepository<T> where T : IDatabaseObject 
     {
         public readonly DirectoryInfo RootDirectory;
         private readonly DirectoryInfo EntityFolder;
         private readonly string EntityName = typeof(T).Name;
         private readonly string FileFormatEnding = "json";
+
 
         DirectoryInfo DirectoryFolderRootLocation()
         {
@@ -71,32 +75,72 @@ namespace SpaceMUD.Database.Repositor.FileRepository
 
         public T GetSingle(long id)
         {
-            throw new NotImplementedException();
+            var filePath = $"{EntityFolder.FullName}\\{id}.{FileFormatEnding}";
+            FileInfo fileInfo = new FileInfo(filePath);
+            if (!fileInfo.Exists) throw new MUDDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
+            using (var fileReader = new StreamReader(filePath))
+            {
+                var deserialised = fileReader.ReadToEnd();
+                return JsonConvert.DeserializeObject<T>(deserialised);
+            }
         }
 
-        public Task<T> GetSingleAsync(long id)
+        public async Task<T> GetSingleAsync(long id)
         {
-            throw new NotImplementedException();
+            var filePath = $"{EntityFolder.FullName}\\{id}.{FileFormatEnding}";
+            FileInfo fileInfo = new FileInfo(filePath);
+            if (!fileInfo.Exists) throw new MUDDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
+            using (var fileReader = new StreamReader(filePath))
+            {
+                var deserialised = await fileReader.ReadToEndAsync();
+                return JsonConvert.DeserializeObject<T>(deserialised);
+            }
         }
 
         public T Insert(T obj)
         {
-            throw new NotImplementedException();
+            int objId = EntityFolder.GetFiles()?.Count() ?? 0;
+            using (var fileWriter = new StreamWriter($"{EntityFolder.FullName}\\{objId}.{FileFormatEnding}",append:false, encoding: Encoding.UTF8))
+            {
+                var serialised = JsonConvert.SerializeObject(obj);
+                fileWriter.WriteLine(serialised);
+                fileWriter.Flush();
+            }
+            obj.Id = objId;
+            return obj;
         }
 
-        public Task<T> InsertAsync(T Obj)
+        public async Task<T> InsertAsync(T obj)
         {
-            throw new NotImplementedException();
+            int objId = EntityFolder.GetFiles()?.Count() ?? 0;
+            using (var fileWriter = new StreamWriter($"{EntityFolder.FullName}\\{objId}.{FileFormatEnding}", append: false, encoding: Encoding.UTF8))
+            {
+                var serialised = JsonConvert.SerializeObject(obj);
+                await fileWriter.WriteLineAsync(serialised);
+                fileWriter.Flush();
+            }
+            obj.Id = objId;
+            return obj;
         }
 
         public void Update(T obj)
         {
-            throw new NotImplementedException();
+            using (var fileWriter = new StreamWriter($"{EntityFolder.FullName}\\{obj.Id}.{FileFormatEnding}", append: false, encoding: Encoding.UTF8))
+            {
+                var serialised = JsonConvert.SerializeObject(obj);
+                fileWriter.WriteLine(serialised);
+                fileWriter.Flush();
+            }
         }
 
-        public Task UpdateAsync(T obj)
+        public async Task UpdateAsync(T obj)
         {
-            throw new NotImplementedException();
+            using (var fileWriter = new StreamWriter($"{EntityFolder.FullName}\\{obj.Id}.{FileFormatEnding}", append: false, encoding: Encoding.UTF8))
+            {
+                var serialised = JsonConvert.SerializeObject(obj);
+                await fileWriter.WriteLineAsync(serialised);
+                fileWriter.Flush();
+            }
         }
     }
 }

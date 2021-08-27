@@ -51,6 +51,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SpaceMUD.Common\SpaceMUD.Common.csproj">
+      <Project>{7a271c9f-d5bb-4517-8ee8-afe8236e3376}</Project>
+      <Name>SpaceMUD.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SpaceMUD.Database\SpaceMUD.Database.csproj">
       <Project>{7f654e58-63ae-4c45-9113-24bfd01c76f5}</Project>
       <Name>SpaceMUD.Database</Name>
