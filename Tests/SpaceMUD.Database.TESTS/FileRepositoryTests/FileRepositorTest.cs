@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace SpaceMUD.Database.TESTS.FileRepositoryTests
 {
-    [TestFixture]
     public class FileRepositorTest
     {
         class MockGameObject { };
+
         [Test]
+        [TestCase]
         public static void TestGetAll_DoesntError()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
@@ -23,9 +24,11 @@ namespace SpaceMUD.Database.TESTS.FileRepositoryTests
         }
 
         [Test]
+        [TestCase]
         public static void TestFileRepository_CreatesFolders()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
+            repo.GetAll();
             DirectoryInfo path = ((FileRepository<MockGameObject>)repo).RootDirectory;
 
             Assert.IsNotEmpty(path.GetDirectories());

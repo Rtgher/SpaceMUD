@@ -16,7 +16,7 @@ namespace SpaceMUD.Server.Connection
         public bool IsRunning {
             get => _isRunning;
             set {
-                if (_isRunning = true)
+                if (_isRunning == true)
                 {
                     if (value == false) throw new ServerFlowException("Something tried to terminate a socket connection incorrectly. Correct way is through Disconnect()");
                 }
