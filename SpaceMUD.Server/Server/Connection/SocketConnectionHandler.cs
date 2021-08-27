@@ -23,11 +23,13 @@ namespace SpaceMUD.Server.Connection
                     _isRunning = value; }
         }
         private bool _isRunning;
+        
         public SocketConnectionHandler(Socket socket)
         {
             ClientSocket = socket;
             Thread onConnectThread = new Thread(((IConnection) this).OnConnect);
             onConnectThread.Start();
+
         }
 
         void IConnection.Disconnect()

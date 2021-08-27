@@ -17,7 +17,7 @@ namespace SpaceMUD.Database.Repositor.FileRepository
     /// <typeparam name="T">The Entity type</typeparam>
     public class FileRepository<T> : IRepository<T> where T : class
     {
-        private readonly DirectoryInfo RootDirectory;
+        public readonly DirectoryInfo RootDirectory;
         private readonly DirectoryInfo EntityFolder;
         private readonly string EntityName = typeof(T).Name;
         private readonly string FileFormatEnding = "json";
