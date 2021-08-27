@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpaceMUD.Common</RootNamespace>
     <AssemblyName>SpaceMUD.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
+    <Compile Include="Exceptions\Database\Base\MUDDatabaseException.cs" />
+    <Compile Include="Exceptions\Database\MUDDatabaseNoDataException.cs" />
     <Compile Include="Exceptions\MUDException.cs" />
     <Compile Include="Exceptions\Server\ServerFlowException.cs" />
+    <Compile Include="Interfaces\IDatabaseObject.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Logging\Logger.cs" />
