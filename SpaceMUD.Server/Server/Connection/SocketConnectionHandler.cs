@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Common.Exceptions.Server;
+using SpaceMUD.Server.Base.Interface;
 
 namespace SpaceMUD.Server.Connection
 {
@@ -23,13 +24,12 @@ namespace SpaceMUD.Server.Connection
                     _isRunning = value; }
         }
         private bool _isRunning;
+        private readonly IServer Server;
         
-        public SocketConnectionHandler(Socket socket)
+        public SocketConnectionHandler(Socket socket, IServer server)
         {
             ClientSocket = socket;
-            Thread onConnectThread = new Thread(((IConnection) this).OnConnect);
-            onConnectThread.Start();
-
+            Server = server;
         }
 
         void IConnection.Disconnect()
@@ -37,17 +37,17 @@ namespace SpaceMUD.Server.Connection
             throw new NotImplementedException();
         }
 
-        void IConnection.OnConnect()
+        void IConnection.OnConnect(string message)
         {
             throw new NotImplementedException();
         }
 
-        void IConnection.OnDisconnect()
+        void IConnection.OnDisconnect(string message)
         {
             throw new NotImplementedException();
         }
 
-        void IConnection.OnUpdate()
+        void IConnection.OnUpdate(string message)
         {
             throw new NotImplementedException();
         }

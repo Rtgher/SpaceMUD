@@ -10,6 +10,9 @@ using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Common.Logging;
 using SpaceMUD.Common.Tools;
+using SpaceMUD.Base.Tools.Dependency.ServiceContainer;
+using Microsoft.Extensions.DependencyInjection;
+using SpaceMUD.Server.Connection;
 
 namespace SpaceMUD.Server
 {
@@ -19,6 +22,7 @@ namespace SpaceMUD.Server
         List<ISocketConnection> Connections;
         List<IDisposable> Disposables;
         ILog Log;
+        const int Backlog = 40;
 
         public bool Running { get; private set; } = false;
         public IGame Game{ get; private set;}
@@ -38,27 +42,27 @@ namespace SpaceMUD.Server
 
             Connections = new List<ISocketConnection>();
             Disposables = new List<IDisposable>();
-            serverSocket = BuildSocket(_portNumber);
             Game = game;
             //TODO: Innitialise game 
-            //TODO: set Running to true when game starts.
             Disposables.AddRange(new IDisposable[]{ serverSocket, (IDisposable)Log });
+        }
+
+        public void StartServer(int portNumber)
+        {
             try
             {
-                StartServer(_portNumber);
+                serverSocket = BuildSocket(_portNumber);
+                Log.LogInfo($"Starting server on port number {portNumber}.");
+                serverSocket.Listen(Backlog);
+                Running = true;
+                serverSocket.BeginAccept(OnConnect, null);
             }
             catch (Exception any)
             {
                 Log.LogError($"Caught exception while trying to start server. \r\n Aborting...", any);
                 this.Dispose();
-                return;
+                throw;
             }
-        }
-
-        public void StartServer(int portNumber)
-        {
-            throw new NotImplementedException();
-            Running = true;
         }
 
         public void Stop()
@@ -71,6 +75,26 @@ namespace SpaceMUD.Server
         {
             if (Running) Stop();
             foreach (IDisposable disposable in Disposables) disposable.Dispose();
+        }
+
+        private void OnConnect(IAsyncResult asyncResult)
+        {
+            try
+            {
+                var connection = new SocketConnectionHandler(serverSocket.EndAccept(asyncResult), this);
+                ((IConnection)connection).OnConnect("");
+            }catch(SocketException sok)
+            {
+                Log.LogError($"Caught exception while trying to connect to client.", sok);
+                //try to play it cool.
+                serverSocket.BeginAccept(OnConnect, null);
+            }
+            catch(Exception other)
+            {
+                Log.LogError($"Caught unexpected exception while trying to connect to client.", other);
+                Dispose();
+                throw;
+            }
         }
     }
 }
