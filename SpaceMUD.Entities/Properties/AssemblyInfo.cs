@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpaceMUD.Data")]
+[assembly: AssemblyTitle("SpaceMUD.Entities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpaceMUD.Data")]
+[assembly: AssemblyProduct("SpaceMUD.Entities")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d9ae3cb9-36c2-4130-9189-1d5a3b828ae2")]
+[assembly: Guid("73c8bf39-1777-44cc-a9cc-8197022edd9e")]
 
 // Version information for an assembly consists of the following four values:
 //

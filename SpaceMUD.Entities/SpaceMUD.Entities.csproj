@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D9AE3CB9-36C2-4130-9189-1D5A3B828AE2}</ProjectGuid>
+    <ProjectGuid>{73C8BF39-1777-44CC-A9CC-8197022EDD9E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpaceMUD.Data</RootNamespace>
-    <AssemblyName>SpaceMUD.Data</AssemblyName>
+    <RootNamespace>SpaceMUD.Entities</RootNamespace>
+    <AssemblyName>SpaceMUD.Entities</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\GameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Base\" />
+    <ProjectReference Include="..\SpaceMUD.Common\SpaceMUD.Common.csproj">
+      <Project>{7a271c9f-d5bb-4517-8ee8-afe8236e3376}</Project>
+      <Name>SpaceMUD.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
