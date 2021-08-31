@@ -40,14 +40,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Actor\BaseActor.cs" />
+    <Compile Include="Base\Actor\BaseCombatant.cs" />
     <Compile Include="Base\GameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trait\Descriptive\Base\ICan\IHaveHeight.cs" />
+    <Compile Include="Trait\Descriptive\Base\ICan\IHaveWeight.cs" />
+    <Compile Include="Trait\Descriptive\Base\IDo\IHeight.cs" />
+    <Compile Include="Trait\Descriptive\Base\IDo\IWeight.cs" />
+    <Compile Include="Trait\Descriptive\HeightMetric.cs" />
+    <Compile Include="Trait\Descriptive\WeightMetric.cs" />
+    <Compile Include="Trait\Functional\Base\ICan\ICanDie.cs" />
+    <Compile Include="Trait\Functional\Base\ICan\ICanFight.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpaceMUD.Common\SpaceMUD.Common.csproj">
       <Project>{7a271c9f-d5bb-4517-8ee8-afe8236e3376}</Project>
       <Name>SpaceMUD.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actors\Combatant\" />
+    <Folder Include="Actors\NonCombatant\" />
+    <Folder Include="Actors\Player\" />
+    <Folder Include="Items\Decoratives\" />
+    <Folder Include="Items\Usables\" />
+    <Folder Include="Trait\Functional\Base\IDo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
