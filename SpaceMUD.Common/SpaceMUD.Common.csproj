@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
+    <Compile Include="Enums\Data\Measurements\MeasurementUnit.cs" />
     <Compile Include="Exceptions\Database\Base\MUDDatabaseException.cs" />
     <Compile Include="Exceptions\Database\MUDDatabaseNoDataException.cs" />
     <Compile Include="Exceptions\MUDException.cs" />
