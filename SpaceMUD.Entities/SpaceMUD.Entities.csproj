@@ -50,6 +50,7 @@
     <Compile Include="Trait\Descriptive\Base\IDo\IWeight.cs" />
     <Compile Include="Trait\Descriptive\HeightMetric.cs" />
     <Compile Include="Trait\Descriptive\WeightMetric.cs" />
+    <Compile Include="Trait\Functional\Base\ICan\ICanBePickedUp.cs" />
     <Compile Include="Trait\Functional\Base\ICan\ICanDie.cs" />
     <Compile Include="Trait\Functional\Base\ICan\ICanFight.cs" />
   </ItemGroup>

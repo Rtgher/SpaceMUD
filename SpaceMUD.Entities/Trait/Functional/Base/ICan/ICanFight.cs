@@ -8,5 +8,6 @@ namespace SpaceMUD.Entities.Trait.Functional.Base.ICan
 {
     public interface ICanFight
     {
+
     }
 }

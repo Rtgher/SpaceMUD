@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpaceMUD.Entities.Trait.Descriptive.Base.ICan
 {
-    interface IHaveWeight
+    public interface IHaveWeight
     {
         IWeight Weight { get; }
     }
