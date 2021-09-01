@@ -48,14 +48,17 @@
     <Compile Include="Exceptions\Database\Base\MUDDatabaseException.cs" />
     <Compile Include="Exceptions\Database\MUDDatabaseNoDataException.cs" />
     <Compile Include="Exceptions\MUDException.cs" />
+    <Compile Include="Exceptions\Server\Account\PasswordEncryptionException.cs" />
     <Compile Include="Exceptions\Server\ServerFlowException.cs" />
     <Compile Include="Interfaces\IDatabaseObject.cs" />
     <Compile Include="Interfaces\IGame.cs" />
     <Compile Include="Interfaces\ILog.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Attributes\CreditAttribute.cs" />
     <Compile Include="Tools\DirectoryHelper.cs" />
     <Compile Include="Tools\Extensions\DirectoryInfoExtensions.cs" />
+    <Compile Include="Tools\PasswordEncryptionHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
