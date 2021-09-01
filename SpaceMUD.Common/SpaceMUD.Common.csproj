@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Client\AccountPermissions.cs" />
     <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
     <Compile Include="Enums\Data\Functional\ArmourClass.cs" />
     <Compile Include="Enums\Data\Functional\DamageType.cs" />
