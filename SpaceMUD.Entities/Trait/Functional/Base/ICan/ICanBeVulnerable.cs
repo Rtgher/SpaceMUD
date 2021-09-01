@@ -1,10 +1,11 @@
 ﻿using SpaceMUD.Entities.Trait.Functional.Base.IDo;
+using System.Collections.Generic;
 
 
 namespace SpaceMUD.Entities.Trait.Functional.Base.ICan
 {
-    public interface ICanDie 
+    public interface ICanBeVulnerable
     {
-        IDoDie DoDie { get; }
+        IList<IDoVulnerable> Vulnerabilities { get; }
     }
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SpaceMUD.Entities.Trait.Descriptive.Base.ICan
+namespace SpaceMUD.Entities.Trait.Descriptive.Base.IHave
 {
-    public interface IHaveWeight
+    public interface IHaveHeight
     {
-        IWeight Weight { get; }
+        IHeight Height { get; }
     }
 }
