@@ -10,10 +10,10 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
     /// <summary>
     /// Declares that the decorated class can be or is a Noun.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Enum, AllowMultiple = true, Inherited = true)]
         public class NounAttribute : PartOfSpeechAttribute
     {
         public TargetType IsType;
-        public NounAttribute(string value, TargetType isType, params string[] synonyms) : base(value, synonyms) { }
+        public NounAttribute(TargetType isType, string value, params string[] synonyms) : base(value, synonyms) { }
     }
 }

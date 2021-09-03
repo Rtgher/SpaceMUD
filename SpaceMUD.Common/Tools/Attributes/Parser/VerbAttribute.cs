@@ -15,7 +15,7 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
     {
         public TargetType TargetType;
 
-        public VerbAttribute(string value, TargetType target,  params string[] synonyms) : base(value, synonyms)
+        public VerbAttribute(TargetType target, string value, params string[] synonyms) : base(value, synonyms)
         {
             TargetType = target;
         }
