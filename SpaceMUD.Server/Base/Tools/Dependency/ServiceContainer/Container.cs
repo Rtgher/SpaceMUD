@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 using SpaceMUD.Server.Base.Interface;
 using SpaceMUD.Server;
 using SpaceMUD.Server.Base.Interface.Connection;
