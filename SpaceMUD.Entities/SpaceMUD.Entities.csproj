@@ -52,11 +52,13 @@
     <Compile Include="Trait\Descriptive\Base\IDo\IAmmo.cs" />
     <Compile Include="Trait\Descriptive\Base\IHave\IHaveAmmo.cs" />
     <Compile Include="Trait\Descriptive\Base\IHave\IHaveHeight.cs" />
+    <Compile Include="Trait\Descriptive\Base\IHave\IHaveRace.cs" />
     <Compile Include="Trait\Descriptive\Base\IHave\IHaveValue.cs" />
     <Compile Include="Trait\Descriptive\Base\IHave\IHaveWeight.cs" />
     <Compile Include="Trait\Descriptive\Base\IDo\IHeight.cs" />
     <Compile Include="Trait\Descriptive\Base\IDo\IWeight.cs" />
     <Compile Include="Trait\Descriptive\HeightMetric.cs" />
+    <Compile Include="Trait\Descriptive\Races\Race.cs" />
     <Compile Include="Trait\Descriptive\WeightMetric.cs" />
     <Compile Include="Trait\Functional\Base\ICan\ICanBePickedUp.cs" />
     <Compile Include="Trait\Functional\Base\ICan\ICanBePickedUpIfImDead.cs" />
