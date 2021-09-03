@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpaceMUD.Entities.Trait.Functional.Base.IDo;
+using SpaceMUD.Common.Tools.Attributes.Parser;
 
 namespace SpaceMUD.Entities.Trait.Descriptive.Races
 {
+    [Adjective("Race", "Species", "Kin")]
     public abstract class Race : IDatabaseObject, ICanBeVulnerable
     {
         /// <summary>

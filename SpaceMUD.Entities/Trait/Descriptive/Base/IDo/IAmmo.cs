@@ -1,7 +1,4 @@
-﻿using SpaceMUD.Common.Enums.Data.Functional;
-
-
-namespace SpaceMUD.Entities.Trait.Descriptive.Base.IDo
+﻿namespace SpaceMUD.Entities.Trait.Descriptive.Base.IDo
 {
     /// <summary>
     /// Runs on the idea that whatever implements IAmmo runs almost as a sort of magazine.

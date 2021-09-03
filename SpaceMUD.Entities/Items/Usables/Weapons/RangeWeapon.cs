@@ -1,13 +1,13 @@
 ﻿using SpaceMUD.Entities.Trait.Descriptive.Base.IHave;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceMUD.Entities.Trait.Descriptive.Base.IDo;
+using SpaceMUD.Common.Enums.Data.Functional;
+using SpaceMUD.Common.Tools.Attributes.Parser;
 
 namespace SpaceMUD.Entities.Items.Usables.Weapons
 {
+    [Noun(TargetType.Actor | TargetType.Item | TargetType.Vehicle, "Gun", "range weapon", "ranged weapon", "rw")]
     public class RangeWeapon : MeleeWeapon, IHaveAmmo
     {
         public IEnumerable<IAmmo> Magazines { get; } = new List<IAmmo>();
