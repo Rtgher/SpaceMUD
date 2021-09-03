@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace SpaceMUD.Common.Enums.Data.Functional
 {
+    [Flags]
     public enum TargetType
     {
         Default = 0,
         Item = 1,
         PickableItem = 2,
-        Actor = 3,
-        Weapon = 4,
-        Consumable = 5,
-        Vehicle = 6
+        Actor = 4,
+        Weapon = 8,
+        Consumable = 16,
+        Vehicle = 32
     }
 }
