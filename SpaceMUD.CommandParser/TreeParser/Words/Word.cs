@@ -9,8 +9,8 @@ namespace SpaceMUD.CommandParser.TreeParser.Words
 {
     internal class Word
     {
-        string Value { get; }
-        WordTypeEnum PartOfSpeechType { get; }
+        internal string Value { get; }
+        internal WordTypeEnum PartOfSpeechType { get; }
 
         public Word(string value, WordTypeEnum wordType)
         {
