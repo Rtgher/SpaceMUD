@@ -50,6 +50,7 @@
     <Compile Include="Exceptions\Database\Base\MUDDatabaseException.cs" />
     <Compile Include="Exceptions\Database\MUDDatabaseNoDataException.cs" />
     <Compile Include="Exceptions\MUDException.cs" />
+    <Compile Include="Exceptions\Parser\InvalidSyntaxException.cs" />
     <Compile Include="Exceptions\Server\Account\PasswordEncryptionException.cs" />
     <Compile Include="Exceptions\Server\ServerFlowException.cs" />
     <Compile Include="Interfaces\IDatabaseObject.cs" />
