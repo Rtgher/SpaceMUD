@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Client\AccountPermissions.cs" />
+    <Compile Include="Commands\Base\ICommand.cs" />
+    <Compile Include="Enums\Client\Commands\CommandsType.cs" />
     <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
     <Compile Include="Enums\Data\Functional\ArmourClass.cs" />
     <Compile Include="Enums\Data\Functional\DamageType.cs" />
