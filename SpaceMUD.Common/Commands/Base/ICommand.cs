@@ -8,5 +8,6 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Base
 {
     public interface ICommand
     {
+        public CommandsType Type { get; }
     }
 }
