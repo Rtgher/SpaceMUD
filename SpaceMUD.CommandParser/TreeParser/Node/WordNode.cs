@@ -151,6 +151,8 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         {
             if (this.Parent != null) Parent.AddNode(node);
             else Parent = node;
+
+            Parent.AddNode(this);
         }
 
         private void AddToLeft(WordNode node)
