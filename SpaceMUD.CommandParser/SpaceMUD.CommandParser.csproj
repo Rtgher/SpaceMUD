@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Base\ICommandParser.cs" />
+    <Compile Include="TreeParser\Base\IWordTree.cs" />
     <Compile Include="TreeParser\Enums\WordTypeEnum.cs" />
     <Compile Include="TreeParser\Node\INode.cs" />
     <Compile Include="TreeParser\Node\WordNode.cs" />
