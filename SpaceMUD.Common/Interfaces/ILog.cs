@@ -9,7 +9,7 @@ namespace SpaceMUD.Common.Interfaces
     /// <summary>
     /// A basic logging interface to handle logs.
     /// </summary>
-    public interface ILog
+    public interface ILog : IDisposable
     {
         void LogInfo(string info);
         void LogWarning(string info, Exception caughtException = null);
