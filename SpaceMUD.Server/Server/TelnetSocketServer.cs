@@ -19,7 +19,7 @@ namespace SpaceMUD.Server
     public class TelnetSocketServer : IServer, IDisposable
     {
         Socket serverSocket;
-        List<ISocketConnection> Connections;
+        public List<ISocketConnection> Connections { get; private set; }
         List<IDisposable> Disposables;
         ILog Log;
         const int Backlog = 40;
@@ -38,24 +38,25 @@ namespace SpaceMUD.Server
         public TelnetSocketServer(IGame game, int portNumber=4000)
         {
             _portNumber = portNumber;
-            Log = new Logger(DirectoryHelper.GetInstalationDirectoryRoot().FullName);
+            Log = new Logger(DirectoryHelper.GetInstalationDirectoryRoot().FullName+"/Logs/");
 
             Connections = new List<ISocketConnection>();
             Disposables = new List<IDisposable>();
             Game = game;
             //TODO: Innitialise game 
-            Disposables.AddRange(new IDisposable[]{ serverSocket, (IDisposable)Log });
+            Disposables.AddRange(new IDisposable[]{ serverSocket, Log });
         }
 
-        public void StartServer(int portNumber)
+        public void StartServer()
         {
             try
             {
                 serverSocket = BuildSocket(_portNumber);
-                Log.LogInfo($"Starting server on port number {portNumber}.");
+                Log.LogInfo($"Starting server on port number {_portNumber}.");
                 serverSocket.Listen(Backlog);
                 Running = true;
                 serverSocket.BeginAccept(OnConnect, null);
+                Log.LogInfo("Server started. Waiting for conenctions...");
             }
             catch (Exception any)
             {
@@ -67,14 +68,14 @@ namespace SpaceMUD.Server
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             Running = false;
         }
 
         public void Dispose()
         {
             if (Running) Stop();
-            foreach (IDisposable disposable in Disposables) disposable.Dispose();
+            foreach (IDisposable disposable in Disposables) disposable?.Dispose();
         }
 
         private void OnConnect(IAsyncResult asyncResult)
@@ -82,7 +83,10 @@ namespace SpaceMUD.Server
             try
             {
                 var connection = new SocketConnectionHandler(serverSocket.EndAccept(asyncResult), this);
-                ((IConnection)connection).OnConnect("");
+                ((IConnection)connection).OnConnect("Connection successful.");
+                Connections.Add(connection);
+
+                serverSocket.BeginAccept(OnConnect, null);
             }catch(SocketException sok)
             {
                 Log.LogError($"Caught exception while trying to connect to client.", sok);

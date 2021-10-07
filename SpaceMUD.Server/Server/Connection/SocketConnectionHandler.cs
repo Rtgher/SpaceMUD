@@ -39,7 +39,8 @@ namespace SpaceMUD.Server.Connection
 
         void IConnection.OnConnect(string message)
         {
-            throw new NotImplementedException();
+            SendToClient(message);
+            //throw new NotImplementedException();
         }
 
         void IConnection.OnDisconnect(string message)
@@ -55,6 +56,12 @@ namespace SpaceMUD.Server.Connection
         void IDisposable.Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        private void SendToClient(string message)
+        {
+            Byte[] messageAsBytes = Encoding.ASCII.GetBytes(message);
+            ClientSocket.Send(messageAsBytes, messageAsBytes.Length, SocketFlags.None);
         }
     }
 }
