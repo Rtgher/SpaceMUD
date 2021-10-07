@@ -13,6 +13,7 @@ using SpaceMUD.Common.Tools;
 using SpaceMUD.Base.Tools.Dependency.ServiceContainer;
 using Microsoft.Extensions.DependencyInjection;
 using SpaceMUD.Server.Connection;
+using SpaceMUD.Common.Exceptions;
 
 namespace SpaceMUD.Server
 {
@@ -82,12 +83,22 @@ namespace SpaceMUD.Server
         {
             try
             {
-                var connection = new SocketConnectionHandler(serverSocket.EndAccept(asyncResult), this);
+                var sok = serverSocket.EndAccept(asyncResult);
+                var connection = new SocketConnectionHandler(sok, this);
                 ((IConnection)connection).OnConnect("Connection successful.");
-                Connections.Add(connection);
+                if (sok != null)
+                {
+                    Connections.Add(connection);
+                    Log.LogInfo("New client connection established.");
+                }
+                else
+                {
+                    throw new MUDException("Connection failed, socket is null.");
+                }
 
                 serverSocket.BeginAccept(OnConnect, null);
-            }catch(SocketException sok)
+            }
+            catch (Exception sok) when (sok is SocketException || sok is MUDException)
             {
                 Log.LogError($"Caught exception while trying to connect to client.", sok);
                 //try to play it cool.
