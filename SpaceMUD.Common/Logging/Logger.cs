@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpaceMUD.Common.Interfaces;
+using SpaceMUD.Common.Tools.Extensions;
 
 namespace SpaceMUD.Common.Logging
 {
@@ -19,6 +20,8 @@ namespace SpaceMUD.Common.Logging
         public Logger(string logSavePath, int maxCharCount= 5000)
         {
             _logSavePath = logSavePath;
+            var directory = new DirectoryInfo(logSavePath);
+            directory.CreateIfNotExist();
             MaxCharCount = maxCharCount;
         }
 
@@ -26,7 +29,7 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[ERROR]:{message}\r\n[Exception Message]:{exception.Message}\r\n[StackTrace]: {exception.StackTrace}";
             Console.WriteLine(log);
-            _logBuffer.AppendLine(log);
+            LogBuffer.AppendLine(log);
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 
@@ -34,7 +37,7 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[Info]: {info}";
             Console.WriteLine(log);
-            _logBuffer.AppendLine(log);
+            LogBuffer.AppendLine(log);
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 
@@ -42,14 +45,14 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[Warning]:{warningInfo}\r\n[StackTrace]: {caughtException?.StackTrace?? "No Stack trace available."}";
             Console.WriteLine(log);
-            _logBuffer.AppendLine(log);
+            LogBuffer.AppendLine(log);
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 
         public void PurgeLog()
         {
             using (StreamWriter file = new StreamWriter(_logSavePath + "/gamelog.txt", append: true)) file.WriteLine(LogBuffer.ToString());
-            _logBuffer.Clear();
+            LogBuffer.Clear();
         }
 
         void IDisposable.Dispose()
