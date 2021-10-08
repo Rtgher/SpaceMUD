@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SpaceMUD.Entities.Network;
+using SpaceMUD.Server.Connection.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,7 @@ namespace SpaceMUD.Server.Base.Interface.Connection
         void OnDisconnect(string message);
         void Disconnect();
         void OnUpdate(string message);
-
+        Account Account { get; }
+        event EventHandler<MessageReceivedArgs> MessageReceived;
     }
 }
