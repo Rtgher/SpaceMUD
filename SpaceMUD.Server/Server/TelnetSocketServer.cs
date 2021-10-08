@@ -14,6 +14,7 @@ using SpaceMUD.Base.Tools.Dependency.ServiceContainer;
 using Microsoft.Extensions.DependencyInjection;
 using SpaceMUD.Server.Connection;
 using SpaceMUD.Common.Exceptions;
+using SpaceMUD.Server.Connection.Events;
 
 namespace SpaceMUD.Server
 {
@@ -86,6 +87,7 @@ namespace SpaceMUD.Server
                 var sok = serverSocket.EndAccept(asyncResult);
                 var connection = new SocketConnectionHandler(sok, this);
                 ((IConnection)connection).OnConnect("Connection successful.");
+                connection.MessageReceived += Connection_MessageReceived;
                 if (sok != null)
                 {
                     Connections.Add(connection);
@@ -110,6 +112,11 @@ namespace SpaceMUD.Server
                 Dispose();
                 throw;
             }
+        }
+
+        private void Connection_MessageReceived(object sender, MessageReceivedArgs e)
+        {
+            Log.LogInfo($@"Account '{e.Account?.Username??"Unknown"}' has sent message '{e.Message.TrimEnd()}' to server, of {e.RawData.Length} bytes lenght.");
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Threading;
 using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Common.Exceptions.Server;
 using SpaceMUD.Server.Base.Interface;
+using SpaceMUD.Entities.Network;
+using SpaceMUD.Server.Connection.Events;
 
 namespace SpaceMUD.Server.Connection
 {
@@ -19,17 +21,26 @@ namespace SpaceMUD.Server.Connection
             set {
                 if (_isRunning == true)
                 {
-                    if (value == false) throw new ServerFlowException("Something tried to terminate a socket connection incorrectly. Correct way is through Disconnect()");
+                    if (value == false)
+                        throw new ServerFlowException("Something tried to terminate a socket connection incorrectly. " +
+                            "Correct way is through Disconnect()");
                 }
-                    _isRunning = value; }
+                _isRunning = value; }
         }
+
+        public Account Account { get; private set; } = null;
+        public event EventHandler<MessageReceivedArgs> MessageReceived;
+
         private bool _isRunning;
         private readonly IServer Server;
+        private const int RECEIVE_BUFFER_SIZE = 512;
+        private Byte[] receiveStream = new Byte[RECEIVE_BUFFER_SIZE];
         
         public SocketConnectionHandler(Socket socket, IServer server)
         {
             ClientSocket = socket;
             Server = server;
+            socket.BeginReceive(receiveStream, 0, RECEIVE_BUFFER_SIZE, SocketFlags.None, SendToServer, null);
         }
 
         void IConnection.Disconnect()
@@ -55,13 +66,24 @@ namespace SpaceMUD.Server.Connection
 
         void IDisposable.Dispose()
         {
-            throw new NotImplementedException();
+            ClientSocket.Dispose();
         }
 
         private void SendToClient(string message)
         {
             Byte[] messageAsBytes = Encoding.ASCII.GetBytes(message);
             ClientSocket.Send(messageAsBytes, messageAsBytes.Length, SocketFlags.None);
+        }
+        private void SendToServer(IAsyncResult asyncResult)
+        {
+            var receivedBytesNumber = ClientSocket.EndReceive(asyncResult);
+            var messageReceived = Encoding.ASCII.GetString(receiveStream, 0, receivedBytesNumber);
+            var tempStream = new Byte[RECEIVE_BUFFER_SIZE];
+            receiveStream.CopyTo(tempStream, 0);
+            receiveStream = new Byte[RECEIVE_BUFFER_SIZE];//reset the buffer
+            ClientSocket.BeginReceive(receiveStream, 0, RECEIVE_BUFFER_SIZE, SocketFlags.None, SendToServer, null);
+
+            MessageReceived.Invoke(this, new MessageReceivedArgs { Message = messageReceived, RawData = tempStream, Account = this.Account});
         }
     }
 }
