@@ -29,7 +29,8 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[ERROR]:{message}\r\n[Exception Message]:{exception.Message}\r\n[StackTrace]: {exception.StackTrace}";
             Console.WriteLine(log);
-            LogBuffer.AppendLine(log);
+            lock (LogBuffer)
+            { LogBuffer.AppendLine(log);}
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 
@@ -37,7 +38,8 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[Info]: {info}";
             Console.WriteLine(log);
-            LogBuffer.AppendLine(log);
+            lock (LogBuffer)
+            { LogBuffer.AppendLine(log); }
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 
@@ -45,7 +47,8 @@ namespace SpaceMUD.Common.Logging
         {
             string log = $"[{time}]-[Warning]:{warningInfo}\r\n[StackTrace]: {caughtException?.StackTrace?? "No Stack trace available."}";
             Console.WriteLine(log);
-            LogBuffer.AppendLine(log);
+            lock (LogBuffer)
+            { LogBuffer.AppendLine(log); }
             if (_logBuffer.Length >= MaxCharCount) PurgeLog();
         }
 

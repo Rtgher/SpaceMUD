@@ -20,9 +20,8 @@ namespace SpaceMUD.Base.Tools.Dependency.ServiceContainer
 
         public static IServiceCollection ConfigureServicesForSocketServer()
         {
-             _services.AddScoped<IServer, TelnetSocketServer>()
-            .AddScoped<ISocketConnection, SocketConnectionHandler>()
-            .AddScoped<ILog, Logger>();
+            _services.AddScoped<IServer, TelnetSocketServer>()
+                .AddScoped<ISocketConnection, SocketConnectionHandler>();
             return _services;
         }
     }

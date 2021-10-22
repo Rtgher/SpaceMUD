@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Data.Base.Interface;
 
 namespace SpaceMUD.Database.Repositor.Base.Interface
 {
@@ -10,7 +11,7 @@ namespace SpaceMUD.Database.Repositor.Base.Interface
     /// A public interface for a generic IRepository to be used throughout the game.
     /// </summary>
     /// <typeparam name="T">The object type to handle.</typeparam>
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : IDatabaseObject
     {
         /// <summary>
         /// Returns all objects of that type. Potentially resource intensive. Use Sparingly.

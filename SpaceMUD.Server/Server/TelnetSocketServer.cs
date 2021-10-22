@@ -40,7 +40,7 @@ namespace SpaceMUD.Server
         public TelnetSocketServer(IGame game, int portNumber=4000)
         {
             _portNumber = portNumber;
-            Log = new Logger(DirectoryHelper.GetInstalationDirectoryRoot().FullName+"/Logs/");
+            Log = SpaceMUD.Common.Dependency.DependencyContainer.Provider.GetService<ILog>();
 
             Connections = new List<ISocketConnection>();
             Disposables = new List<IDisposable>();
@@ -117,6 +117,12 @@ namespace SpaceMUD.Server
         private void Connection_MessageReceived(object sender, MessageReceivedArgs e)
         {
             Log.LogInfo($@"Account '{e.Account?.Username??"Unknown"}' has sent message '{e.Message.TrimEnd()}' to server, of {e.RawData.Length} bytes lenght.");
+            if (e.Account == null)
+            {
+                IConnection conn = sender as IConnection;
+
+                var action = conn.ActionsHandlers.Delegate(conn, e);
+            }
         }
     }
 }

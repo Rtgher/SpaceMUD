@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Server.ActionHandler;
 
 namespace SpaceMUD.Server.Base.Interface.Connection
 {
@@ -19,7 +20,8 @@ namespace SpaceMUD.Server.Base.Interface.Connection
         void Disconnect();
         void PrepareUpdate(string message);
         void Update();
-        Account Account { get; }
+        Account Account { get; set; }
         event EventHandler<MessageReceivedArgs> MessageReceived;
+        ActionHandlers ActionsHandlers { get; }
     }
 }

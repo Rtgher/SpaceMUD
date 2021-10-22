@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SpaceMUD.Common.Enums.Client.Commands;
 
-namespace SpaceMUD.Common.Enums.Client.Commands.Base
+namespace SpaceMUD.Common.Commands.Base
 {
     public interface ICommand
     {

@@ -1,33 +1,114 @@
-﻿using SpaceMUD.Base.Interface.ActionHandler;
+﻿using System;
+using SpaceMUD.Base.Interface.ActionHandler;
 using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Server.Connection.Events;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using SpaceMUD.Common.Dependency;
+using SpaceMUD.Common.Enums.Client.CommandData;
+using SpaceMUD.Common.Enums.Client.Commands.Configuration;
+using SpaceMUD.Common.Tools;
+using SpaceMUD.Entities.Network;
+using SpaceMUD.Server.Actions;
 
 namespace SpaceMUD.Server.ActionHandler
 {
     public class LoginActionHandler : IActionHandler
     {
-        private readonly ILog log;
+        private readonly ILog Log;
         protected string Username { get; set; } = null;
         protected string PasswordUnEncrypted { get; set; } = null;
 
         public bool IsDataComplete => !(Username == null || PasswordUnEncrypted == null);
-        public LoginActionHandler(ILog log)
+        private bool IsActionComplete { get; set; } = false;
+        private bool FoundAccount = false;
+
+        public LoginActionHandler()
         {
-            this.log = log;
+            this.Log = DependencyContainer.Provider.GetService<ILog>();
         }
 
-        public void HandleAction(IConnection conn, MessageReceivedArgs args)
+        public MUSAction HandleAction(IConnection conn, MessageReceivedArgs args)
         {
             if (args.Message.Length < 2)
-            { log.LogWarning("Received too short a message. Something went wrong."); return; }
+            { Log.LogWarning("Received too short a message. Something went wrong."); return new MUSAction()
+            {
+                Command = new LoginCommand() { Data = new LoginCommandData() { CommandSucceeded = false } }
+            }; }
             var tokens = args.Message.Split();
+            ExtractDataFromMessage(conn, args, tokens);
+
+            conn.Update();
+            if (!IsDataComplete)
+                return new MUSAction()
+                {
+                    Command = new LoginCommand()
+                    {
+                        Data = new LoginCommandData()
+                        {
+                            CommandSucceeded = false,
+                            Username = this.Username,
+                            PasswordUnencoded = PasswordUnEncrypted
+                        }
+                    }
+                };
+
+            var connectionAccount = RetrieveAccountFromDatabase(conn);
+            if (!FoundAccount)
+            {
+                conn.PrepareUpdate($"Account '{Username}' not found. If you'd like to create a new account, type the keyword 'create' followed by the account name and password, separated by spaces.");
+            }
+            conn.Update();
+            conn.Account = connectionAccount;
+            return new MUSAction()
+            {
+                Command = new LoginCommand()
+                {
+                    Data = new LoginCommandData()
+                    {
+                        Username = this.Username,
+                        PasswordUnencoded = this.PasswordUnEncrypted,
+                        CommandSucceeded = IsActionComplete
+                    }
+                },
+            };
+        }
+
+        private Account RetrieveAccountFromDatabase(IConnection conn)
+        {
+            var accounts = SpaceMUD.Database.Repositor.Repos.Account.GetAll();
+            foreach (var account in accounts)
+            {
+                if (account.Username.Equals(Username, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    FoundAccount = true;
+                    Log.LogInfo($"Found account match for {Username}");
+                    if (PasswordUnEncrypted.Equals(PasswordEncryptionHelper.DecodeFrom64(account.EncodedPassword)))
+                    {
+                        Log.LogInfo("Login succeeded.");
+                        IsActionComplete = true;
+                        conn.PrepareUpdate($"Connection succcesful. Welcome back {Username}!");
+                        return account;
+                    }
+                    else
+                    {
+                        conn.PrepareUpdate("Invalid password. Please try again. Enter just the password in your next message, followed by the key 'Enter'.");
+                        PasswordUnEncrypted = String.Empty;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private void ExtractDataFromMessage(IConnection conn, MessageReceivedArgs args, string[] tokens)
+        {
             switch (tokens.Length)
             {
-                case var expression when (args.Message.Split().Length>=2):
+                case var expression when (args.Message.Split().Length >= 2):
                     int i = 0;
                     while (!IsValidFormat(tokens[i])) { i++; if (i == tokens.Length) break; }
                     if (Username == null)
@@ -40,12 +121,12 @@ namespace SpaceMUD.Server.ActionHandler
                             if (i == tokens.Length) break;//if we reach end of tokens for this message we end here.
                         }
                     }
-                    
-                    if(PasswordUnEncrypted == null)
+
+                    if (PasswordUnEncrypted == null)
                     {
                         string password;
-                        password = args.Message.Contains(Username)? 
-                         args.Message.Substring(args.Message.IndexOf(Username) + Username.Length):args.Message;
+                        password = args.Message.Contains(Username) ?
+                         args.Message.Substring(args.Message.IndexOf(Username) + Username.Length) : args.Message;
                         if (IsValidFormat(password))
                         {
                             PasswordUnEncrypted = password;
@@ -54,7 +135,7 @@ namespace SpaceMUD.Server.ActionHandler
                             conn.PrepareUpdate($" and password '{hiddenPassword}'");
                         }
                     }
-                        break;
+                    break;
                 case 1:
                     if (Username == null)
                     {
@@ -85,11 +166,6 @@ namespace SpaceMUD.Server.ActionHandler
                 default:
                     break;
             }
-
-            conn.Update();
-            ///try to retrieve the account from db.
-            /// if successful, check the password. if unsuccessful, suggest creating a new account.
-            /// set the account to the connection.
         }
 
         private bool IsValidFormat(string token, Regex allowedFormat = null)
