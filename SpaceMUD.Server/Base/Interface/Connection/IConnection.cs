@@ -17,7 +17,8 @@ namespace SpaceMUD.Server.Base.Interface.Connection
         void OnConnect(string message);
         void OnDisconnect(string message);
         void Disconnect();
-        void OnUpdate(string message);
+        void PrepareUpdate(string message);
+        void Update();
         Account Account { get; }
         event EventHandler<MessageReceivedArgs> MessageReceived;
     }
