@@ -28,13 +28,14 @@ namespace SpaceMUD.Server.Connection
                 _isRunning = value; }
         }
 
-        public Account Account { get; private set; } = null;
+        public Account Account { get; set; } = null;
         public event EventHandler<MessageReceivedArgs> MessageReceived;
 
         private bool _isRunning;
         private readonly IServer Server;
         private const int RECEIVE_BUFFER_SIZE = 512;
         private Byte[] receiveStream = new Byte[RECEIVE_BUFFER_SIZE];
+        private string sendingStream;
         
         public SocketConnectionHandler(Socket socket, IServer server)
         {
@@ -59,9 +60,15 @@ namespace SpaceMUD.Server.Connection
             throw new NotImplementedException();
         }
 
-        void IConnection.OnUpdate(string message)
+        void IConnection.PrepareUpdate(string message)
         {
-            throw new NotImplementedException();
+            sendingStream += message;
+        }
+
+        void IConnection.Update()
+        {
+            SendToClient(sendingStream);
+            sendingStream = string.Empty;
         }
 
         void IDisposable.Dispose()
