@@ -185,7 +185,9 @@
     <Compile Include="Base\Tools\Dependency\ServiceContainer\Container.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\ActionHandler\ActionHandlers.cs" />
     <Compile Include="Server\ActionHandler\LoginActionHandler.cs" />
+    <Compile Include="Server\Actions\MUSAction.cs" />
     <Compile Include="Server\Connection\Events\MessageReceivedArgs.cs" />
     <Compile Include="Server\Connection\SocketConnectionHandler.cs" />
     <Compile Include="Server\TelnetSocketServer.cs" />
@@ -196,9 +198,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpaceMUD.CommandParser\SpaceMUD.CommandParser.csproj">
+      <Project>{c2d3ffb9-207b-4d3a-83c2-2ffd1151ec74}</Project>
+      <Name>SpaceMUD.CommandParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpaceMUD.Common\SpaceMUD.Common.csproj">
       <Project>{7a271c9f-d5bb-4517-8ee8-afe8236e3376}</Project>
       <Name>SpaceMUD.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpaceMUD.Database\SpaceMUD.Database.csproj">
+      <Project>{7f654e58-63ae-4c45-9113-24bfd01c76f5}</Project>
+      <Name>SpaceMUD.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpaceMUD.Entities\SpaceMUD.Entities.csproj">
       <Project>{73C8BF39-1777-44CC-A9CC-8197022EDD9E}</Project>
