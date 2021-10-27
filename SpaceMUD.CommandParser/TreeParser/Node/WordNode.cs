@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Node
 {
@@ -37,94 +38,94 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         {
             switch (Value.PartOfSpeechType)
             {
-                case Enums.WordTypeEnum.Verb:
+                case WordTypeEnum.Verb:
                     switch (node.Value.PartOfSpeechType)
                     {
-                        case Enums.WordTypeEnum.Verb:
+                        case WordTypeEnum.Verb:
                             throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node.Value} after {Value}.");
                             break;
-                        case Enums.WordTypeEnum.Noun:
-                        case Enums.WordTypeEnum.Adjective:
-                        case Enums.WordTypeEnum.Preposition:
+                        case WordTypeEnum.Noun:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adverb:
                             AddToLeft(node);
                             break;
-                        case Enums.WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
                             break;
                     }
                     break;
-                case Enums.WordTypeEnum.Noun:
+                case WordTypeEnum.Noun:
                     switch (node.Value.PartOfSpeechType)
                     {
-                        case Enums.WordTypeEnum.Verb:
-                        case Enums.WordTypeEnum.Noun:
+                        case WordTypeEnum.Verb:
+                        case WordTypeEnum.Noun:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Adverb:
-                        case Enums.WordTypeEnum.Adjective:
-                        case Enums.WordTypeEnum.Preposition:
+                        case WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
                             AddToLeft(node);
                             break;
-                        case Enums.WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
                             break;
                     }
                     break;
-                case Enums.WordTypeEnum.Adverb:
+                case WordTypeEnum.Adverb:
                     switch (node.Value.PartOfSpeechType)
                     {
-                        case Enums.WordTypeEnum.Verb:
-                        case Enums.WordTypeEnum.Noun:
-                        case Enums.WordTypeEnum.Adverb:
-                        case Enums.WordTypeEnum.Adjective:
-                        case Enums.WordTypeEnum.Preposition:
+                        case WordTypeEnum.Verb:
+                        case WordTypeEnum.Noun:
+                        case WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
                             break;
                     }
                     break;
-                case Enums.WordTypeEnum.Adjective:
+                case WordTypeEnum.Adjective:
                     switch (node.Value.PartOfSpeechType)
                     {
-                        case Enums.WordTypeEnum.Verb:
+                        case WordTypeEnum.Verb:
                             AddToLeft(node);
                             break;
-                        case Enums.WordTypeEnum.Noun:
+                        case WordTypeEnum.Noun:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adverb:
                             AddToLeft(node);
                             break;
-                        case Enums.WordTypeEnum.Adjective:
+                        case WordTypeEnum.Adjective:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Preposition:
+                        case WordTypeEnum.Preposition:
                             AddToRight(node);
                             break;
-                        case Enums.WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             break;
                     }
                     break;
-                case Enums.WordTypeEnum.Preposition:
+                case WordTypeEnum.Preposition:
                     AddToRight(node);
                     break;
-                case Enums.WordTypeEnum.Conjuction:
+                case WordTypeEnum.Conjuction:
                     switch (node.Value.PartOfSpeechType)
                     {
-                        case Enums.WordTypeEnum.Verb:
-                        case Enums.WordTypeEnum.Noun:
-                        case Enums.WordTypeEnum.Adverb:
-                        case Enums.WordTypeEnum.Adjective:
-                        case Enums.WordTypeEnum.Preposition:
+                        case WordTypeEnum.Verb:
+                        case WordTypeEnum.Noun:
+                        case WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
                             if (Left == null)
                             {
                                 AddToLeft(node);
@@ -137,7 +138,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             }
                             AddToLeft(node);
                             break;
-                        case Enums.WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
                             break;

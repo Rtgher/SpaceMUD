@@ -1,11 +1,11 @@
-﻿using SpaceMUD.CommandParser.TreeParser.Enums;
-using SpaceMUD.CommandParser.TreeParser.Node;
+﻿using SpaceMUD.CommandParser.TreeParser.Node;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Base
 {

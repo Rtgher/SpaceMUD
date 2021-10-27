@@ -1,13 +1,13 @@
-﻿using SpaceMUD.CommandParser.TreeParser.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Words
 {
-    internal class Word
+    public class Word
     {
         internal string Value { get; }
         internal WordTypeEnum PartOfSpeechType { get; }

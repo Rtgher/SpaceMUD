@@ -9,6 +9,7 @@ namespace SpaceMUD.CommandParser.Base
 {
     public interface ICommandParser
     {
+        
         void ParseCommand(string command);
     }
 }
