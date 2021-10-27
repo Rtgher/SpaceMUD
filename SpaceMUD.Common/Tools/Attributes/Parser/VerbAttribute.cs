@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.Common.Tools.Attributes.Parser
 {
@@ -15,7 +16,7 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
     {
         public TargetType TargetType;
 
-        public VerbAttribute(TargetType target, string value, params string[] synonyms) : base(value, synonyms)
+        public VerbAttribute(TargetType target, params string[] synonyms) : base(WordTypeEnum.Verb,synonyms)
         {
             TargetType = target;
         }

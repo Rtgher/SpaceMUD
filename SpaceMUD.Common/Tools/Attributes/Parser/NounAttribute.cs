@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.Common.Tools.Attributes.Parser
 {
@@ -14,6 +15,6 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
         public class NounAttribute : PartOfSpeechAttribute
     {
         public TargetType IsType;
-        public NounAttribute(TargetType isType, string value, params string[] synonyms) : base(value, synonyms) { }
+        public NounAttribute(TargetType isType, params string[] synonyms) : base(WordTypeEnum.Noun, synonyms) { }
     }
 }
