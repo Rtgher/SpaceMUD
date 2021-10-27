@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceMUD.Base.Interface.ActionHandler;
 using SpaceMUD.Server.Actions;
 using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Server.Connection.Events;
@@ -11,11 +12,16 @@ namespace SpaceMUD.Server.ActionHandler
 {
     public class ActionHandlers
     {
-        public LoginActionHandler LoginActionHandler { get; private set; }
-
+        protected Dictionary<IConnection, ActionsContainer> MapActionsContainersToConnections = new Dictionary<IConnection, ActionsContainer>();
+        
         public ActionHandlers()
         {
-            LoginActionHandler = new LoginActionHandler();
+            
+        }
+
+        public void AddConnection(IConnection conn)
+        {
+            MapActionsContainersToConnections.Add(conn, new ActionsContainer());
         }
 
         public MUSAction Delegate(IConnection conn, MessageReceivedArgs args)
@@ -24,7 +30,7 @@ namespace SpaceMUD.Server.ActionHandler
             {
                 if (args.Message.StartsWith("create", StringComparison.InvariantCultureIgnoreCase) || args.Message.StartsWith("create acc", StringComparison.InvariantCultureIgnoreCase))
                 {
-
+                    return MapActionsContainersToConnections[conn].CreateAccountActionHandler.HandleAction(conn, args);
                 }
                 else
                 {
@@ -32,7 +38,7 @@ namespace SpaceMUD.Server.ActionHandler
                         args.Message = args.Message.Remove(0, 5).TrimStart();
                     if (args.Message.StartsWith("log in", StringComparison.InvariantCultureIgnoreCase))
                         args.Message = args.Message.Remove(0, 6).TrimStart();
-                    return LoginActionHandler.HandleAction(conn, args);
+                    return MapActionsContainersToConnections[conn].LoginActionHandler.HandleAction(conn, args);
                 }
             }
 

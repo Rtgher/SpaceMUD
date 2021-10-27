@@ -14,6 +14,7 @@ using SpaceMUD.Base.Tools.Dependency.ServiceContainer;
 using Microsoft.Extensions.DependencyInjection;
 using SpaceMUD.Server.Connection;
 using SpaceMUD.Common.Exceptions;
+using SpaceMUD.Server.ActionHandler;
 using SpaceMUD.Server.Connection.Events;
 
 namespace SpaceMUD.Server
@@ -28,6 +29,7 @@ namespace SpaceMUD.Server
 
         public bool Running { get; private set; } = false;
         public IGame Game{ get; private set;}
+        public ActionHandlers ActionHandlers { get; } = new ActionHandlers();
 
         private int _portNumber;
         private Socket BuildSocket(int portNumber)
@@ -86,10 +88,12 @@ namespace SpaceMUD.Server
             {
                 var sok = serverSocket.EndAccept(asyncResult);
                 var connection = new SocketConnectionHandler(sok, this);
-                ((IConnection)connection).OnConnect("Connection successful.");
-                connection.MessageReceived += Connection_MessageReceived;
+                
                 if (sok != null)
                 {
+                    ((IConnection)connection).OnConnect("Connection successful.");
+                    ActionHandlers.AddConnection(connection);
+                    connection.MessageReceived += Connection_MessageReceived;
                     Connections.Add(connection);
                     Log.LogInfo("New client connection established.");
                 }
@@ -121,7 +125,7 @@ namespace SpaceMUD.Server
             {
                 IConnection conn = sender as IConnection;
 
-                var action = conn.ActionsHandlers.Delegate(conn, e);
+                var action = ActionHandlers.Delegate(conn, e);
             }
         }
     }

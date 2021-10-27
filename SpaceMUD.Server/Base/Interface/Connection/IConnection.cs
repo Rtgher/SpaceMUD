@@ -22,6 +22,5 @@ namespace SpaceMUD.Server.Base.Interface.Connection
         void Update();
         Account Account { get; set; }
         event EventHandler<MessageReceivedArgs> MessageReceived;
-        ActionHandlers ActionsHandlers { get; }
     }
 }

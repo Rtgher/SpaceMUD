@@ -31,7 +31,6 @@ namespace SpaceMUD.Server.Connection
 
         public Account Account { get; set; } = null;
         public event EventHandler<MessageReceivedArgs> MessageReceived;
-        public ActionHandlers ActionsHandlers { get; }
 
         private bool _isRunning;
         private readonly IServer Server;
@@ -44,7 +43,6 @@ namespace SpaceMUD.Server.Connection
             ClientSocket = socket;
             Server = server;
             socket.BeginReceive(receiveStream, 0, RECEIVE_BUFFER_SIZE, SocketFlags.None, SendToServer, null);
-            ActionsHandlers = new ActionHandlers();
         }
 
         void IConnection.Disconnect()
