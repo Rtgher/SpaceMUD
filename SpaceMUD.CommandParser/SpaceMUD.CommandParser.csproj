@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\WordDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\ICommandParser.cs" />
     <Compile Include="TreeParser\Base\IWordTree.cs" />
-    <Compile Include="TreeParser\Enums\WordTypeEnum.cs" />
     <Compile Include="TreeParser\Node\INode.cs" />
     <Compile Include="TreeParser\Node\WordNode.cs" />
     <Compile Include="TreeParser\Words\Word.cs" />
@@ -53,6 +53,13 @@
       <Project>{7a271c9f-d5bb-4517-8ee8-afe8236e3376}</Project>
       <Name>SpaceMUD.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpaceMUD.Entities\SpaceMUD.Entities.csproj">
+      <Project>{73C8BF39-1777-44CC-A9CC-8197022EDD9E}</Project>
+      <Name>SpaceMUD.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TreeParser\Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,20 +1,19 @@
 ﻿using System;
-using SpaceMUD.Base.Interface.ActionHandler;
-using SpaceMUD.Common.Interfaces;
-using SpaceMUD.Server.Base.Interface.Connection;
-using SpaceMUD.Server.Connection.Events;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
+using SpaceMUD.Base.Interface.ActionHandler;
 using SpaceMUD.Common.Dependency;
 using SpaceMUD.Common.Enums.Client.CommandData;
 using SpaceMUD.Common.Enums.Client.Commands.Configuration;
+using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Common.Tools;
 using SpaceMUD.Entities.Network;
 using SpaceMUD.Server.Actions;
+using SpaceMUD.Server.Base.Interface.Connection;
+using SpaceMUD.Server.Connection.Events;
 
-namespace SpaceMUD.Server.ActionHandler
+namespace SpaceMUD.Server.ActionHandler.ConfigurationActions
 {
     public class LoginActionHandler : IActionHandler
     {

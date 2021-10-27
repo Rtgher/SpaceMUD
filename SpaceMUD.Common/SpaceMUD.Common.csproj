@@ -70,6 +70,7 @@
     <Compile Include="Enums\Data\Functional\DamageType.cs" />
     <Compile Include="Enums\Data\Functional\TargetType.cs" />
     <Compile Include="Enums\Data\Measurements\MeasurementUnit.cs" />
+    <Compile Include="Enums\Parser\WordTypeEnum.cs" />
     <Compile Include="Exceptions\Database\Base\MUDDatabaseException.cs" />
     <Compile Include="Exceptions\Database\MUDDatabaseNoDataException.cs" />
     <Compile Include="Exceptions\MUDException.cs" />
