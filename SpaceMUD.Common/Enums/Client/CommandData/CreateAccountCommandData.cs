@@ -8,8 +8,8 @@ namespace SpaceMUD.Common.Enums.Client.CommandData
 {
     public class CreateAccountCommandData : Common.Commands.Base.CommandData
     {
-        public string Username { get; set; }
-        public string UnEncodedPassword { get; set; }
+        public string Username { get; set; } = null;
+        public string UnEncodedPassword { get; set; } = null;
 
     }
 }
