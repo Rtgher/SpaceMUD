@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpaceMUD.Common.Enums.Parser;
+using SpaceMUD.Common.Tools.Attributes.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Words
 {
@@ -11,11 +12,13 @@ namespace SpaceMUD.CommandParser.TreeParser.Words
     {
         internal string Value { get; }
         internal WordTypeEnum PartOfSpeechType { get; }
-
-        public Word(string value, WordTypeEnum wordType)
+        public PartOfSpeechAttribute Attribute { get; }
+        public Word(string value, PartOfSpeechAttribute attribute)
         {
             Value = value;
-            PartOfSpeechType = wordType;
+            PartOfSpeechType = attribute.ParOfSpeechType;
+            Attribute = attribute;
         }
+
     }
 }

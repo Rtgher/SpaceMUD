@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Dependency;
 using SpaceMUD.Common.Enums.Client.Commands.Configuration;
-using SpaceMUD.Common.Enums.Parser;
 using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
@@ -57,21 +55,51 @@ namespace SpaceMUD.CommandParser.Base
         {
             foreach (var synonym in partOfSpeech.Synonyms)
             {
-                AddToLexic(synonym, partOfSpeech.ParOfSpeechType);
+                AddToLexic(synonym, partOfSpeech);
             }
         }
 
-        private void AddToLexic(string word, WordTypeEnum wordType)
+        public PartOfSpeechAttribute FindInLexic(string word)
+        {
+            var searchItem = word.Trim();
+            var startingChar = word[0];
+
+            var registeredWords = Lexic[startingChar];
+            foreach (var registeredWord in registeredWords)
+            {
+                if (registeredWord.Value.Equals(searchItem, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return registeredWord.Attribute;
+                }
+            }
+
+            _log.LogWarning($"Could not find word '{word}' in Lexic.");
+            return null;
+        }
+
+        public bool IsInLexic(string word)
+        {
+            if (FindInLexic(word) != null) return true;
+            else return false;
+        }
+
+        public bool IsInLexic(PartOfSpeechAttribute attribute)
+        {
+            if (attribute.Synonyms.Any(word => IsInLexic(word))) return true;
+            else return false;
+        }
+
+        private void AddToLexic(string word, PartOfSpeechAttribute attribute)
         {
             char startChar = word.TrimStart().FirstOrDefault();
             if(Lexic.ContainsKey(startChar))
             {
                 if (Lexic[startChar].Find(item => item.Value == word)==null) //don't add if already there.
-                    Lexic[startChar].Add(new Word(word, wordType));
+                    Lexic[startChar].Add(new Word(word, attribute));
             }
             else
             {
-                Lexic.Add(startChar, new List<Word>(){new Word(word, wordType)});
+                Lexic.Add(startChar, new List<Word>(){new Word(word, attribute)});
             }
         }
     }
