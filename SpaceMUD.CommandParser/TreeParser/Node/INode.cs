@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpaceMUD.CommandParser.TreeParser.Node
 {
-    internal interface INode
+    public interface INode
     {
         Word Value
         {

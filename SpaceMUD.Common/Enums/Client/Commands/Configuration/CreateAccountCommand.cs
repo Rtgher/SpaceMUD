@@ -8,8 +8,7 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     [Verb(TargetType.Default, "Create", "createaccount")]
     public class CreateAccountCommand : ICommand
     {
-        public CreateAccountCommandData Data { get; set; }
-
         public CommandsType Type { get; } = CommandsType.Configuration;
+        public Common.Commands.Base.CommandData Data { get; set; } = new CreateAccountCommandData();
     }
 }

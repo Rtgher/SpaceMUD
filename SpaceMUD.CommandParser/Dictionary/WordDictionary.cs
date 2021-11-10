@@ -13,6 +13,7 @@ namespace SpaceMUD.CommandParser.Dictionary
 {
     public class WordDictionary
     {
+        public const char MultiWord = ' ';
         public Dictionary<char, List<Word>> Lexic { get; private set; }
         private ILog _log = DependencyContainer.Provider.GetService(typeof(ILog)) as ILog;
 
@@ -92,6 +93,7 @@ namespace SpaceMUD.CommandParser.Dictionary
         private void AddToLexic(string word, PartOfSpeechAttribute attribute)
         {
             char startChar = word.TrimStart().FirstOrDefault();
+            if (word.Contains(MultiWord)) startChar = MultiWord;
             if(Lexic.ContainsKey(startChar))
             {
                 if (Lexic[startChar].Find(item => item.Value == word)==null) //don't add if already there.

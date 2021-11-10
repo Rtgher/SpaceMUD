@@ -14,6 +14,6 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     public class LoginCommand : ICommand
     {
         public CommandsType Type { get; } = CommandsType.Configuration;
-        public LoginCommandData Data { get; set; }
+        public Common.Commands.Base.CommandData Data { get; set; } = new LoginCommandData();
     }
 }
