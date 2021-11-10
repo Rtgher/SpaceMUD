@@ -1,14 +1,9 @@
-﻿using SpaceMUD.CommandParser.TreeParser.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SpaceMUD.Common.Commands.Base;
 
 namespace SpaceMUD.CommandParser.Base
 {
     public interface ICommandParser
     {
-        IWordTree ParseCommand(string command);
+        ICommand ParseCommand(string command);
     }
 }
