@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\WordDictionary.cs" />
+    <Compile Include="Base\ILexic.cs" />
+    <Compile Include="Dictionary\WordDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\ICommandParser.cs" />
     <Compile Include="TreeParser\Base\IWordTree.cs" />
     <Compile Include="TreeParser\Node\INode.cs" />
     <Compile Include="TreeParser\Node\WordNode.cs" />
+    <Compile Include="TreeParser\TreeParser.cs" />
     <Compile Include="TreeParser\Words\Word.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
 using SpaceMUD.Entities.Base;
 
-namespace SpaceMUD.CommandParser.Base
+namespace SpaceMUD.CommandParser.Dictionary
 {
     public class WordDictionary
     {
