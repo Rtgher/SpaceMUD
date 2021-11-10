@@ -9,7 +9,7 @@ using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Node
 {
-    internal class WordNode : INode
+    public class WordNode : INode
     {
 
         public WordNode(Word value)
