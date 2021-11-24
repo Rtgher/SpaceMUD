@@ -11,7 +11,7 @@
         /// </summary>
         Preposition = 16,
         /// <summary>
-        /// AND/BUT/ALTHOUGH/etc...
+        /// AND/BUT/ALTHOUGH/EQUALS/etc...
         /// </summary>
         Conjuction = 32
 

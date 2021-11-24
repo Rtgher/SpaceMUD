@@ -8,6 +8,7 @@ using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
 using SpaceMUD.Entities.Base;
+using SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords;
 
 namespace SpaceMUD.CommandParser.Dictionary
 {
@@ -22,6 +23,7 @@ namespace SpaceMUD.CommandParser.Dictionary
             Lexic = new Dictionary<char, List<Word>>();
             AddToLexic(typeof(CreateAccountCommand));
             AddToLexic(typeof(LoginCommand));
+            AddToLexic(typeof(AttributionConjunction));
         }
 
         public void AddToLexic(Type type)
