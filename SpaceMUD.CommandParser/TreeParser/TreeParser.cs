@@ -42,6 +42,7 @@ namespace SpaceMUD.CommandParser.TreeParser
             }
 
             ICommand parsedCommand = (ICommand) Activator.CreateInstance(commandType);
+            return parsedCommand;
         }
 
         private IWordTree ParseTree(string command)
@@ -71,6 +72,7 @@ namespace SpaceMUD.CommandParser.TreeParser
                 }
                 else
                 {
+                    //in case we don't find anything, we pretend it's an adjective.
                     var w = new Word(word, new AdjectiveAttribute(word));
                 }
 
