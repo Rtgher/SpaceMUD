@@ -15,10 +15,10 @@ namespace SpaceMUD.CommandParser.TreeParser
 {
     public class TreeParser : ICommandParser
     {
-        public WordDictionary Lexic { get; }
+        public ILexic Lexic { get; }
         private readonly IEnumerable<Type> CommandsTypelList;
 
-        public TreeParser(WordDictionary lexic)
+        public TreeParser(ILexic lexic)
         {
             Lexic = lexic;
             CommandsTypelList = new List<Type>();
@@ -47,7 +47,7 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         private IWordTree ParseTree(string command)
         {
-            IWordTree tree;
+            IWordTree tree =  Dependency.DependencyContainer.Provider.GetService(typeof(IWordTree)) as IWordTree;
             var words = command.Split();
             for (int i = 0; i < words.Length; i++)
             {

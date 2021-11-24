@@ -9,10 +9,11 @@ using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
 using SpaceMUD.Entities.Base;
 using SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords;
+using SpaceMUD.CommandParser.Base;
 
 namespace SpaceMUD.CommandParser.Dictionary
 {
-    public class WordDictionary
+    public class WordDictionary : ILexic
     {
         public const char MultiWord = ' ';
         public Dictionary<char, List<Word>> Lexic { get; private set; }

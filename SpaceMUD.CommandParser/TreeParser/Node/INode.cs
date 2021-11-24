@@ -17,7 +17,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         WordNode Left { get; }
         WordNode Right { get; }
         //Add a new Node
-        WordNode AddNode(WordNode node);
+        WordNode AddNode(INode node);
 
     }
 }
