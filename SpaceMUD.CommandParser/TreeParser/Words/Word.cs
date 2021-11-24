@@ -20,5 +20,13 @@ namespace SpaceMUD.CommandParser.TreeParser.Words
             Attribute = attribute;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (this == null && obj == null) return true;
+            if (this == null || obj == null) return false;
+            var other = (Word)obj;
+
+            return this.PartOfSpeechType == other.PartOfSpeechType && (this.Value == other.Value||this.Attribute.Synonyms.Contains<string>(other.Value));
+        }
     }
 }

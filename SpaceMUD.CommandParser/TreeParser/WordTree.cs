@@ -34,12 +34,53 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         public INode SearchTree(Word word)
         {
-            throw new NotImplementedException();
+            return SearchWords(RootNode, word);
         }
 
         public INode SearchTree(WordTypeEnum typeEnum, int count = 1)
         {
-            throw new NotImplementedException();
+            int actualCount = 0;
+            return SearchWords(RootNode, typeEnum, count, ref actualCount);
+        }
+
+        private INode SearchWords(INode node, WordTypeEnum typeEnum, int count, ref int actualCount)
+        {
+            if (node.Value == null) return null;
+            if (node.Value.PartOfSpeechType == typeEnum)
+            {
+                actualCount++;
+                if (actualCount == count) return node;
+                
+            }
+            if (node.Left != null)
+            {
+                var returnedLeft = SearchWords(node.Left, typeEnum, count, ref actualCount);
+                if (returnedLeft != null) return returnedLeft;
+            }
+            if(node.Right != null)
+            {
+                var returnedRight = SearchWords(node.Right, typeEnum, count, ref actualCount);
+                if (returnedRight != null) return returnedRight;
+            }
+            return null;
+        }
+
+        private INode SearchWords(INode node, Word word)
+        {
+            if (node.Value == null) return null;
+            if (node.Value.Equals(word)) return node;
+            if (node.Left != null)
+            {
+                var returnLeft = SearchWords(node.Left, word);
+                if (returnLeft != null) return returnLeft;
+            }
+            if(node.Right != null)
+            {
+                var returnRight = SearchWords(node.Right, word);
+                if (returnRight != null) return returnRight;
+            }
+
+            return null;
         }
     }
 }
