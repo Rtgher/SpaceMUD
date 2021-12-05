@@ -64,6 +64,7 @@
     <Compile Include="Enums\Client\CommandData\LoginCommandData.cs" />
     <Compile Include="Enums\Client\Commands\CommandsType.cs" />
     <Compile Include="Enums\Client\Commands\Configuration\CreateAccountCommand.cs" />
+    <Compile Include="Enums\Client\Commands\Configuration\InvalidCommand.cs" />
     <Compile Include="Enums\Client\Commands\Configuration\LoginCommand.cs" />
     <Compile Include="Enums\Client\Connection\DisconnectReason.cs" />
     <Compile Include="Enums\Data\Functional\ArmourClass.cs" />

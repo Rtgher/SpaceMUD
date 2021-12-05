@@ -35,7 +35,7 @@ namespace SpaceMUD.Server.ActionHandler.ConfigurationActions
             if (args.Message.Length < 2)
             { Log.LogWarning("Received too short a message. Something went wrong."); return new MUSAction()
             {
-                Command = new LoginCommand() { Data = new LoginCommandData() { CommandSucceeded = false } }
+                Command = new LoginCommand() { RawData = new LoginCommandData() { CommandSucceeded = false } }
             }; }
             var tokens = args.Message.Split();
             ExtractDataFromMessage(conn, args, tokens);
@@ -46,7 +46,7 @@ namespace SpaceMUD.Server.ActionHandler.ConfigurationActions
                 {
                     Command = new LoginCommand()
                     {
-                        Data = new LoginCommandData()
+                        RawData = new LoginCommandData()
                         {
                             CommandSucceeded = false,
                             Username = this.Username,
@@ -66,7 +66,7 @@ namespace SpaceMUD.Server.ActionHandler.ConfigurationActions
             {
                 Command = new LoginCommand()
                 {
-                    Data = new LoginCommandData()
+                    RawData = new LoginCommandData()
                     {
                         Username = this.Username,
                         PasswordUnencoded = this.PasswordUnEncrypted,

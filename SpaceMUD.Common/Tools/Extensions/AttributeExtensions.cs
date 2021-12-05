@@ -18,7 +18,23 @@ namespace SpaceMUD.Common.Tools.Extensions
               ? (T)attributes[0]
               : null;
         }
+        /// <summary>
+        /// Same as above, only overloaded to work with types directly.
+        /// </summary>
+        /// <typeparam name="T">The attribute type to return</typeparam>
+        public static T GetAttribute<T>(this Type type) where T: Attribute
+        {
+            var attributes = type.GetCustomAttributes(inherit:true);
+            foreach(var attribute in attributes)
+            {
+                if(attribute.GetType() == typeof(T))
+                {
+                    return attribute as T;
+                }
+            }
 
+            return null;
+        }
         /// <summary>
         /// Same as above, only overloaded to work with classes/objects as well
         /// </summary>
@@ -27,6 +43,10 @@ namespace SpaceMUD.Common.Tools.Extensions
         {
             var type = value.GetType();
             var memberInfo = type.GetMember(value.ToString());
+            if (memberInfo.IsFixedSize == null || memberInfo.Length == 0)
+            {
+                throw new MissingMemberException($"Member info of class type {type.Name} : {type.Namespace} has no values.");
+            }
             var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
             return attributes.Length > 0
               ? (T)attributes[0]

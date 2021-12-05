@@ -2,6 +2,7 @@
 using SpaceMUD.Common.Enums.Client.CommandData;
 using SpaceMUD.Common.Enums.Data.Functional;
 using SpaceMUD.Common.Tools.Attributes.Parser;
+using System;
 
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
@@ -9,6 +10,14 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     public class CreateAccountCommand : ICommand
     {
         public CommandsType Type { get; } = CommandsType.Configuration;
-        public Common.Commands.Base.CommandData Data { get; set; } = new CreateAccountCommandData();
+        public Common.Commands.Base.CommandData RawData { get; set; } = new Common.Commands.Base.CreateAccountCommandData();
+        public CreateAccountCommandData ProcessedData
+        {
+            get =>((CreateAccountCommandData) RawData).FormatRawData();
+        }
+        private CreateAccountCommandData _processedData = null;
+        
+
+        
     }
 }

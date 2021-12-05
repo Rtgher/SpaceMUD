@@ -29,9 +29,8 @@ namespace SpaceMUD.CommandParser.Dictionary
 
         public void AddToLexic(Type type)
         {
-            var memberInfo = type.GetMember(type.ToString());
-            var partOfSpeech = memberInfo[0].GetCustomAttributes(typeof(PartOfSpeechAttribute), false);
-            if (partOfSpeech.IsFixedSize == null || partOfSpeech.Length == 0)
+            var partOfSpeech = type.GetAttribute<PartOfSpeechAttribute>();
+            if (partOfSpeech == null)
                 _log.LogWarning($"Tried to get a partofspeech attribute from Type '{type.Name}' but got nothing.");
             AddToLexic(partOfSpeech);
         }

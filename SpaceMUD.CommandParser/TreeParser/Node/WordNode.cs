@@ -1,10 +1,5 @@
 ﻿using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Exceptions.Parser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Node
@@ -23,18 +18,18 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
 
         public Word Value { get; private set; }
 
-        public WordNode Parent { get; set; }
+        public INode Parent { get; set; }
 
-        public WordNode Left { get; private set; }
+        public INode Left { get; private set; }
 
-        public WordNode Right { get; private set; }
+        public INode Right { get; private set; }
 
         /// <summary>
         /// Adds node followign rules in the tree. 
         /// </summary>
         /// <param name="node">The node to be added.</param>
         /// <returns>The tree root.</returns>
-        public WordNode AddNode(WordNode node)
+        public INode AddNode(INode node)
         {
             switch (Value.PartOfSpeechType)
             {
@@ -148,7 +143,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
             return this;
         }
 
-        private void SetAsParent(WordNode node)
+        private void SetAsParent(INode node)
         {
             if (this.Parent != null) Parent.AddNode(node);
             else Parent = node;
@@ -156,7 +151,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
             Parent.AddNode(this);
         }
 
-        private void AddToLeft(WordNode node)
+        private void AddToLeft(INode node)
         {
             if (Left == null)
             {
@@ -165,7 +160,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
             }
             else Left.AddNode(node);
         }
-        private void AddToRight(WordNode node)
+        private void AddToRight(INode node)
         {
             if (Right == null)
             {

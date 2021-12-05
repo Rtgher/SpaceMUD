@@ -13,11 +13,11 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         {
             get;
         }
-        WordNode Parent { get; }
-        WordNode Left { get; }
-        WordNode Right { get; }
+        INode Parent { get; set; }
+        INode Left { get; }
+        INode Right { get; }
         //Add a new Node
-        WordNode AddNode(INode node);
+        INode AddNode(INode node);
 
     }
 }

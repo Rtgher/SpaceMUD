@@ -10,6 +10,11 @@ namespace SpaceMUD.Common.Enums.Client.CommandData
     {
         public string Username { get; set; } = null;
         public string UnEncodedPassword { get; set; } = null;
-
+        public CreateAccountCommandData FormatRawData()
+        {
+            var processedData = new CreateAccountCommandData();
+            ExtractData(processedData);
+            return processedData;
+        }
     }
 }

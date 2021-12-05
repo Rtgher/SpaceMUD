@@ -6,6 +6,6 @@ namespace SpaceMUD.Common.Commands.Base
     public interface ICommand
     {
         CommandsType Type { get; }
-        CommandData Data { get; }
+        CommandData RawData { get; }
     }
 }
