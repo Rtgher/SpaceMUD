@@ -59,6 +59,10 @@
       <Project>{c2d3ffb9-207b-4d3a-83c2-2ffd1151ec74}</Project>
       <Name>SpaceMUD.CommandParser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SpaceMUD.Common\SpaceMUD.Common.csproj">
+      <Project>{7A271C9F-D5BB-4517-8EE8-AFE8236E3376}</Project>
+      <Name>SpaceMUD.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
