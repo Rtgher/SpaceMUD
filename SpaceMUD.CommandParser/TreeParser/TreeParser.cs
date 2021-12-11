@@ -68,12 +68,14 @@ namespace SpaceMUD.CommandParser.TreeParser
                 var partOfSpeech = Lexic.FindInLexic(word);
                 if (partOfSpeech != null)
                 {
-                    tree.AddValue(new Word(word, partOfSpeech));
+                    var addWord = new Word(word, partOfSpeech);
+                    tree.AddValue(addWord);
                 }
                 else
                 {
                     //in case we don't find anything, we pretend it's an adjective.
                     var w = new Word(word, new AdjectiveAttribute(word));
+                    tree.AddValue(w);
                 }
 
             }

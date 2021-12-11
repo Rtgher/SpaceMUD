@@ -56,7 +56,7 @@ namespace SpaceMUD.CommandParser.Dictionary
 
         public void AddToLexic(PartOfSpeechAttribute partOfSpeech)
         {
-            _log.LogInfo($"Adding new part of speech info from type '{partOfSpeech.ParOfSpeechType}'.");
+            _log.LogInfo($"Adding new part of speech info from type '{partOfSpeech.ParOfSpeechType.ToString("G")}'.");
             foreach (var synonym in partOfSpeech.Synonyms)
             {
                 AddToLexic(synonym, partOfSpeech);
@@ -67,6 +67,7 @@ namespace SpaceMUD.CommandParser.Dictionary
         {
             var searchItem = word.Trim();
             var startingChar = word[0];
+            if (!Lexic.ContainsKey(startingChar)) return null;
 
             var registeredWords = Lexic[startingChar];
             foreach (var registeredWord in registeredWords)

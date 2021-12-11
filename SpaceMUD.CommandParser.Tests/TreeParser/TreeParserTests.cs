@@ -16,5 +16,16 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
             Assert.IsNotNull(provider);
             Assert.IsInstanceOfType(provider, typeof(SpaceMUD.CommandParser.TreeParser.TreeParser));
         }
+
+        [TestMethod]
+        public void TestTreeParser_CreatesATree()
+        {
+            string command = "login test1 test1";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+            Assert.IsNotNull(parsedCommand);
+        }
+
+
     }
 }

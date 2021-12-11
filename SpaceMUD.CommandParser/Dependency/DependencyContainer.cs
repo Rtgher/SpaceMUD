@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SpaceMUD.CommandParser.Base;
 using SpaceMUD.CommandParser.Dictionary;
+using SpaceMUD.CommandParser.TreeParser;
+using SpaceMUD.CommandParser.TreeParser.Base;
 using SpaceMUD.CommandParser.TreeParser.Node;
 using System;
 
@@ -19,6 +21,7 @@ namespace SpaceMUD.CommandParser.Dependency
             self.AddScoped<INode, WordNode>();
             self.AddScoped<ICommandParser, TreeParser.TreeParser>();
             self.AddScoped<ILexic, WordDictionary>();
+            self.AddScoped<IWordTree, WordTree>();
             return self;
         }
     }
