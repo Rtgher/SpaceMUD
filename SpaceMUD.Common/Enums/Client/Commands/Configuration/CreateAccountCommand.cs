@@ -10,7 +10,7 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     public class CreateAccountCommand : ICommand
     {
         public CommandsType Type { get; } = CommandsType.Configuration;
-        public Common.Commands.Base.CommandData RawData { get; set; } = new Common.Commands.Base.CreateAccountCommandData();
+        public Common.Commands.Base.CommandData RawData { get; set; } = new CreateAccountCommandData();
         public CreateAccountCommandData ProcessedData
         {
             get =>((CreateAccountCommandData) RawData).FormatRawData();

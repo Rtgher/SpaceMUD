@@ -27,7 +27,7 @@ namespace SpaceMUD.Common.Tools.Extensions
             var attributes = type.GetCustomAttributes(inherit:true);
             foreach(var attribute in attributes)
             {
-                if(attribute.GetType() == typeof(T))
+                if(attribute.GetType().IsSubclassOf(typeof(T)) || attribute.GetType() == typeof(T))
                 {
                     return attribute as T;
                 }

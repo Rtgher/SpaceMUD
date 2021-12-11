@@ -56,6 +56,7 @@ namespace SpaceMUD.CommandParser.Dictionary
 
         public void AddToLexic(PartOfSpeechAttribute partOfSpeech)
         {
+            _log.LogInfo($"Adding new part of speech info from type '{partOfSpeech.ParOfSpeechType}'.");
             foreach (var synonym in partOfSpeech.Synonyms)
             {
                 AddToLexic(synonym, partOfSpeech);
