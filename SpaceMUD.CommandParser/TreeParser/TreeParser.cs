@@ -24,7 +24,7 @@ namespace SpaceMUD.CommandParser.TreeParser
             CommandsTypelList = new List<Type>();
             var commandAssembly = typeof(LoginCommand).Assembly;
             CommandsTypelList = commandAssembly.GetTypes()
-                .Where(type => type.CustomAttributes.Any(attr => attr.AttributeType is PartOfSpeechAttribute));
+                .Where(type => type.CustomAttributes.Any(attr => attr.AttributeType.IsSubclassOf(typeof(PartOfSpeechAttribute))));
         }
 
         public ICommand ParseCommand(string command)

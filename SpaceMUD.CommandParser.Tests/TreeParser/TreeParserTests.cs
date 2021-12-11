@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpaceMUD.CommandParser.Dependency;
 using SpaceMUD.CommandParser.Base;
 using SpaceMUD.CommandParser.TreeParser;
+using SpaceMUD.Common.Commands.Base;
+using SpaceMUD.Common.Enums.Client.Commands.Configuration;
 
 namespace SpaceMUD.CommandParser.Tests.TreeParser
 {
@@ -26,6 +28,24 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
             Assert.IsNotNull(parsedCommand);
         }
 
+        [TestMethod]
+        public void TestTreeParser_CreatesALoginCommandTree()
+        {
+            string command = "login test1 test1";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+            Assert.IsInstanceOfType(parsedCommand, typeof(ICommand));
+            Assert.IsInstanceOfType(parsedCommand, typeof(LoginCommand));
+        }
 
+        [TestMethod]
+        public void TestTreeParser_CreatesACreateAccountCommandTree()
+        {
+            string command = "create test1 test1";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+            Assert.IsInstanceOfType(parsedCommand, typeof(ICommand));
+            Assert.IsInstanceOfType(parsedCommand, typeof(CreateAccountCommand));
+        }
     }
 }

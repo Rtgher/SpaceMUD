@@ -12,10 +12,11 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
     {
         public string[] Synonyms;
 
-        public WordTypeEnum ParOfSpeechType { get; }
+        public WordTypeEnum ParOfSpeechType { get; private set; }
 
         public PartOfSpeechAttribute(WordTypeEnum type, params string[] synonyms)
         {
+            ParOfSpeechType = type;
             Synonyms = synonyms.Select(word=> word.ToLower()).ToArray();
         }
 
