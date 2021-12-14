@@ -53,7 +53,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             SetAsParent(node);
                             return Parent;
                             break;
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             AddToRight(node);
                             break;
                     }
@@ -71,7 +71,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToLeft(node);
                             break;
                         case WordTypeEnum.Conjuction:
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             SetAsParent(node);
                             return Parent;
                             break;
@@ -91,7 +91,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             SetAsParent(node);
                             return Parent;
                             break;
@@ -117,7 +117,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             SetAsParent(node);
                             break;
                     }
@@ -134,7 +134,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             break;
                         case WordTypeEnum.Conjuction:
                             throw new InvalidSyntaxException("Cannot have a Conjunction after a preposition!");
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after a preposition!");
                             break;
                     }
@@ -163,12 +163,12 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             SetAsParent(node);
                             return Parent;
                             break;
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after a conjunction!");
                             break;
                     }
                     break;
-                case WordTypeEnum.Egalizer:
+                case WordTypeEnum.Equalizer:
                     switch (node.Value.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
@@ -182,7 +182,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                         case WordTypeEnum.Conjuction:
                             throw new InvalidSyntaxException("Cannot have an conjunction after an equalizer symbol!");
                             break;
-                        case WordTypeEnum.Egalizer:
+                        case WordTypeEnum.Equalizer:
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after an equalizer symbol!");
                             break;
                     }

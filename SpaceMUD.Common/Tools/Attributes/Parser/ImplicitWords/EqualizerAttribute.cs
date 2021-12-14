@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords
 {
-    [Conjunction(Synonyms = new string[]{":","=", "-"})]
-    public class AttributionConjunction
+    [Conjunction(Synonyms = new string[]{":", "=", "-", "==", "is"})]
+    public class EqualizerClass
     {
     }
 }
