@@ -11,7 +11,7 @@ namespace SpaceMUD.Common.Tools.Attributes.Parser
     /// <summary>
     /// Declares that the decorated class can be or is a Noun.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Enum, AllowMultiple = true, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
         public class NounAttribute : PartOfSpeechAttribute
     {
         public TargetType IsType;

@@ -9,12 +9,13 @@ namespace SpaceMUD.Common.Enums.Data.Functional
     [Flags]
     public enum TargetType
     {
-        Default = 0,
+        DataField = 0,
         Item = 1,
         PickableItem = 2,
         Actor = 4,
         Weapon = 8,
         Consumable = 16,
         Vehicle = 32
+
     }
 }

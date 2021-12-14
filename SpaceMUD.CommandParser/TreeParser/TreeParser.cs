@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SpaceMUD.CommandParser.Base;
-using SpaceMUD.CommandParser.Dictionary;
 using SpaceMUD.CommandParser.TreeParser.Base;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Commands.Base;
@@ -34,6 +33,7 @@ namespace SpaceMUD.CommandParser.TreeParser
             var verbs = tree.GetParts(WordTypeEnum.Verb);
             for(int i=0; i<verbs.Count(); i++)
             {
+                ICommand buildingCommand = null;
                 Type commandType = null;
                 var verb = verbs.ElementAt(i);
 
@@ -45,15 +45,21 @@ namespace SpaceMUD.CommandParser.TreeParser
                         break;
                     }
                 }
+                buildingCommand = (ICommand)Activator.CreateInstance(commandType);
+
+                foreach (var leaf in tree.ParseTree())
+                {
+                    if (leaf == verb) continue;
+                    if (leaf.Value.PartOfSpeechType == WordTypeEnum.Verb) break;
+                }
+
+                if (parsedCommand == null) parsedCommand = buildingCommand;
+                else parsedCommand.AddFollowUpCommand(buildingCommand);
             }
 
             
-            foreach(var leaf in tree.Get)
-            {
 
-            }
 
-            parsedCommand = (ICommand) Activator.CreateInstance(commandType);
             return parsedCommand;
         }
 
