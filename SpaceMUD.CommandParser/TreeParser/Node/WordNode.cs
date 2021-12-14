@@ -53,6 +53,9 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             SetAsParent(node);
                             return Parent;
                             break;
+                        case WordTypeEnum.Egalizer:
+                            AddToRight(node);
+                            break;
                     }
                     break;
                 case WordTypeEnum.Noun:
@@ -68,6 +71,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToLeft(node);
                             break;
                         case WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Egalizer:
                             SetAsParent(node);
                             return Parent;
                             break;
@@ -77,6 +81,9 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     switch (node.Value.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
+                            SetAsParent(node);
+                            return Parent;
+                            break;
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adverb:
                         case WordTypeEnum.Adjective:
@@ -84,6 +91,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Egalizer:
                             SetAsParent(node);
                             return Parent;
                             break;
@@ -93,10 +101,11 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     switch (node.Value.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
-                            AddToLeft(node);
+                            AddToRight(node);
                             break;
                         case WordTypeEnum.Noun:
-                            AddToRight(node);
+                            SetAsParent(node);
+                            return Parent;
                             break;
                         case WordTypeEnum.Adverb:
                             AddToLeft(node);
@@ -108,12 +117,27 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:
+                        case WordTypeEnum.Egalizer:
                             SetAsParent(node);
                             break;
                     }
                     break;
                 case WordTypeEnum.Preposition:
-                    AddToRight(node);
+                    switch (node.Value.PartOfSpeechType)
+                    {
+                        case WordTypeEnum.Verb:
+                        case WordTypeEnum.Noun:
+                        case WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
+                            AddToRight(node);
+                            break;
+                        case WordTypeEnum.Conjuction:
+                            throw new InvalidSyntaxException("Cannot have a Conjunction after a preposition!");
+                        case WordTypeEnum.Egalizer:
+                            throw new InvalidSyntaxException("Cannot have an equalizer symbol after a preposition!");
+                            break;
+                    }
                     break;
                 case WordTypeEnum.Conjuction:
                     switch (node.Value.PartOfSpeechType)
@@ -138,6 +162,28 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                         case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
+                            break;
+                        case WordTypeEnum.Egalizer:
+                            throw new InvalidSyntaxException("Cannot have an equalizer symbol after a conjunction!");
+                            break;
+                    }
+                    break;
+                case WordTypeEnum.Egalizer:
+                    switch (node.Value.PartOfSpeechType)
+                    {
+                        case WordTypeEnum.Verb:
+                        case WordTypeEnum.Noun:
+                        case WordTypeEnum.Adverb:
+                        case WordTypeEnum.Adjective:
+                        case WordTypeEnum.Preposition:
+                            if (Left == null || (Left.Value.PartOfSpeechType == WordTypeEnum.Preposition && Left.Right == null)) AddToLeft(node);
+                            else AddToRight(node);
+                            break;
+                        case WordTypeEnum.Conjuction:
+                            throw new InvalidSyntaxException("Cannot have an conjunction after an equalizer symbol!");
+                            break;
+                        case WordTypeEnum.Egalizer:
+                            throw new InvalidSyntaxException("Cannot have an equalizer symbol after an equalizer symbol!");
                             break;
                     }
                     break;

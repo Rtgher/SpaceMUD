@@ -51,6 +51,7 @@ namespace SpaceMUD.CommandParser.TreeParser
                 {
                     if (leaf == verb) continue;
                     if (leaf.Value.PartOfSpeechType == WordTypeEnum.Verb) break;
+
                 }
 
                 if (parsedCommand == null) parsedCommand = buildingCommand;
@@ -58,8 +59,6 @@ namespace SpaceMUD.CommandParser.TreeParser
             }
 
             
-
-
             return parsedCommand;
         }
 

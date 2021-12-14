@@ -11,9 +11,12 @@
         /// </summary>
         Preposition = 16,
         /// <summary>
-        /// AND/BUT/ALTHOUGH/EQUALS/etc...
+        /// AND/BUT/ALTHOUGH/etc...
         /// </summary>
-        Conjuction = 32
-
+        Conjuction = 32,
+        /// <summary>
+        /// EQUALS, ==, =
+        /// </summary>
+        Egalizer
     }
 }
