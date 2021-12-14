@@ -9,7 +9,7 @@ namespace SpaceMUD.Common.Commands.Base
     public class CommandData
     {
         public Dictionary<string, string> Values { get; set; }
-
+        public List<string> AdverbValues { get; } = new List<string>();
         protected void ExtractData(dynamic processedData)
         {
             var members = ((Type)processedData.GetType()).GetProperties(System.Reflection.BindingFlags.SetProperty);

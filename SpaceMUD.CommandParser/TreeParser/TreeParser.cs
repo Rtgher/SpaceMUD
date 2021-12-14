@@ -47,10 +47,40 @@ namespace SpaceMUD.CommandParser.TreeParser
                 }
                 buildingCommand = (ICommand)Activator.CreateInstance(commandType);
 
+                bool reachedNode = false;
                 foreach (var leaf in tree.ParseTree())
                 {
-                    if (leaf == verb) continue;
+                    int countUnknown = 0;
+                    if (leaf == verb)
+                    {
+                        reachedNode = true;
+                        continue;
+                    }
+                    if (!reachedNode) continue;//we only want to check the nodes in between the current verb node and the next verb node.
                     if (leaf.Value.PartOfSpeechType == WordTypeEnum.Verb) break;
+                    if(leaf.Value.PartOfSpeechType == WordTypeEnum.Adverb)
+                    {
+                        buildingCommand.RawData.AdverbValues.Add(leaf.Value.Value);
+                    }
+                    if (leaf.Value.PartOfSpeechType == WordTypeEnum.Equalizer)
+                    {
+                        buildingCommand.RawData.Values.Add(leaf.Left.Value.Value, leaf.Right.Value.Value);
+                        tree.GetEnumerator().MoveNext();
+                        tree.GetEnumerator().MoveNext();//skip over the two added values.
+                    }
+                    if(leaf.Value.PartOfSpeechType == WordTypeEnum.Adjective)
+                    {
+                        buildingCommand.RawData.Values.Add((countUnknown++).ToString(), leaf.Value.Value);
+                    }
+                    if(leaf.Value.PartOfSpeechType == WordTypeEnum.Noun)
+                    {
+                        if(leaf.Left!=null && leaf.Left.Value.PartOfSpeechType == WordTypeEnum.Adjective)
+                        {
+                            buildingCommand.RawData.Values.Add((countUnknown++).ToString(), leaf.Left.Value.Value + " " + leaf.Value.Value);
+                            tree.GetEnumerator().MoveNext();
+                        }
+                    }
+                    if (leaf.Value.PartOfSpeechType == WordTypeEnum.Preposition) continue;
 
                 }
 
