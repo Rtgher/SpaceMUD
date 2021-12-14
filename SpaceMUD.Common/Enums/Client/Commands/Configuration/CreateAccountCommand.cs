@@ -10,7 +10,7 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     public class CreateAccountCommand : BaseCommand
     {
         public override CommandsType Type { get; } = CommandsType.Configuration;
-        public override Common.Commands.Base.CommandData RawData { get; } = new CreateAccountCommandData();
+
         public CreateAccountCommandData ProcessedData
         {
             get =>((CreateAccountCommandData) RawData).FormatRawData();

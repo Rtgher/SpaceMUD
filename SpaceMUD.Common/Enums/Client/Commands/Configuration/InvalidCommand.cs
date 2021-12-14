@@ -8,8 +8,6 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 
         public override CommandsType Type => CommandsType.Configuration;
 
-        public override Common.Commands.Base.CommandData RawData { get; } = new Common.Commands.Base.CommandData();
-
         public InvalidCommand(ICommand failedCommand)
         {
             FailedCommand = failedCommand;
