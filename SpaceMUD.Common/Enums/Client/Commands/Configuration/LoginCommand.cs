@@ -11,9 +11,9 @@ using SpaceMUD.Common.Tools.Attributes.Parser;
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
     [Verb(TargetType.Default, "log in", "login")]
-    public class LoginCommand : ICommand
+    public class LoginCommand : BaseCommand
     {
-        public CommandsType Type { get; } = CommandsType.Configuration;
-        public Common.Commands.Base.CommandData RawData { get; set; } = new LoginCommandData();
+        public override CommandsType Type { get; } = CommandsType.Configuration;
+        public override Common.Commands.Base.CommandData RawData { get; } = new LoginCommandData();
     }
 }

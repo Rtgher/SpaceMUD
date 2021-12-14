@@ -7,10 +7,10 @@ using System;
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
     [Verb(TargetType.Default, "Create", "createaccount")]
-    public class CreateAccountCommand : ICommand
+    public class CreateAccountCommand : BaseCommand
     {
-        public CommandsType Type { get; } = CommandsType.Configuration;
-        public Common.Commands.Base.CommandData RawData { get; set; } = new CreateAccountCommandData();
+        public override CommandsType Type { get; } = CommandsType.Configuration;
+        public override Common.Commands.Base.CommandData RawData { get; } = new CreateAccountCommandData();
         public CreateAccountCommandData ProcessedData
         {
             get =>((CreateAccountCommandData) RawData).FormatRawData();
