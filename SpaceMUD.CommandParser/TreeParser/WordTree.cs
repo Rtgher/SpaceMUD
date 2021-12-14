@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 using SpaceMUD.CommandParser.TreeParser.Node;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Enums.Parser;
+using System.Collections;
 
 namespace SpaceMUD.CommandParser.TreeParser
 {
     public class WordTree : IWordTree
     {
         public INode RootNode { get; private set; } = null;
+        private bool _modified = false;
+        private IEnumerable<INode> _nodes;
 
         public void AddValue(Word word)
         {
+            _modified = true;
             INode node = new WordNode(word);
             if(RootNode == null)
             {
@@ -27,9 +31,19 @@ namespace SpaceMUD.CommandParser.TreeParser
             }
         }
 
-        public IEnumerable<Word> ParseTree()
+        public IEnumerator<INode> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ParseTree().GetEnumerator();
+        }
+
+        public IEnumerable<INode> ParseTree()
+        {
+            if (_modified)
+            {
+                List<INode> nodes = new List<INode>();
+                _nodes =  RootNode.Traverse(nodes);
+            }
+            return _nodes;
         }
 
         public INode SearchTree(Word word)
@@ -41,6 +55,11 @@ namespace SpaceMUD.CommandParser.TreeParser
         {
             int actualCount = 0;
             return SearchWords(RootNode, typeEnum, count, ref actualCount);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ParseTree().GetEnumerator();
         }
 
         private INode SearchWords(INode node, WordTypeEnum typeEnum, int count, ref int actualCount)
@@ -81,6 +100,22 @@ namespace SpaceMUD.CommandParser.TreeParser
             }
 
             return null;
+        }
+
+        public IEnumerable<INode> GetParts(WordTypeEnum wordType)
+        {
+            var nodes = ParseTree();
+            var parts = new List<INode>();
+
+            foreach(var leaf in nodes)
+            {
+                if(leaf.Value.PartOfSpeechType == wordType)
+                {
+                    parts.Add(leaf);
+                }
+            }
+
+            return parts;
         }
     }
 }

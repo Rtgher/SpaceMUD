@@ -29,19 +29,31 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         public ICommand ParseCommand(string command)
         {
-            var tree =  ParseTree(command);
-            var verb = tree.SearchTree(WordTypeEnum.Verb);
-            Type commandType = null;
-            foreach (var commType in CommandsTypelList)
+            ICommand parsedCommand = null;
+            var tree = ParseTree(command);
+            var verbs = tree.GetParts(WordTypeEnum.Verb);
+            for(int i=0; i<verbs.Count(); i++)
             {
-                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Value.Value))
+                Type commandType = null;
+                var verb = verbs.ElementAt(i);
+
+                foreach (var commType in CommandsTypelList)
                 {
-                    commandType = commType;
-                    break;
+                    if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Value.Value))
+                    {
+                        commandType = commType;
+                        break;
+                    }
                 }
             }
 
-            ICommand parsedCommand = (ICommand) Activator.CreateInstance(commandType);
+            
+            foreach(var leaf in tree.Get)
+            {
+
+            }
+
+            parsedCommand = (ICommand) Activator.CreateInstance(commandType);
             return parsedCommand;
         }
 

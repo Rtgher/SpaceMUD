@@ -1,6 +1,8 @@
 ﻿using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Exceptions.Parser;
 using SpaceMUD.Common.Enums.Parser;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace SpaceMUD.CommandParser.TreeParser.Node
 {
@@ -168,6 +170,14 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                 Right = node;
             }
             else Right.AddNode(node);
+        }
+
+        public IEnumerable<INode> Traverse(IList<INode> list)
+        {
+            list.Add(this);
+            if (Left!=null) Left.Traverse(list);
+            if (Right != null) Right.Traverse(list);
+            return list;
         }
     }
 }

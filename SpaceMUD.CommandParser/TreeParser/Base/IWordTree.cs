@@ -9,7 +9,7 @@ using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.TreeParser.Base
 {
-    public interface IWordTree
+    public interface IWordTree : IEnumerable<INode>
     { 
         INode RootNode { get; }
         void AddValue(Word word);
@@ -29,6 +29,14 @@ namespace SpaceMUD.CommandParser.TreeParser.Base
         /// <summary>
         /// Parse tree and return an ordered list of words.
         /// </summary>
-        IEnumerable<Word> ParseTree();
+        IEnumerable<INode> ParseTree();
+
+        /// <summary>
+        /// Retrieve all the given parts nodes in the tree.
+        /// Use to get all Verb nodes, all Attribute nodes, all conjunction nodes etc...
+        /// </summary>
+        /// <param name="wordType">The Word type of which node to be retrieved.</param>
+        /// <returns></returns>
+        IEnumerable<INode> GetParts(WordTypeEnum wordType);
     }
 }

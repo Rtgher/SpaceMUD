@@ -47,5 +47,13 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
             Assert.IsInstanceOfType(parsedCommand, typeof(ICommand));
             Assert.IsInstanceOfType(parsedCommand, typeof(CreateAccountCommand));
         }
+
+        public void TestTreeParser_CreatesAttributesFromUnknownTokens()
+        {
+            string command = "create testUnknown testUnknown";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+            Assert.IsNotNull(parsedCommand.RawData.Values);
+        }
     }
 }
