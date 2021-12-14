@@ -33,10 +33,9 @@ namespace SpaceMUD.CommandParser.TreeParser
             var verbs = tree.GetParts(WordTypeEnum.Verb);
             for(int i=0; i<verbs.Count(); i++)
             {
-                ICommand buildingCommand = null;
                 var verb = verbs.ElementAt(i);
 
-                BuildCommand(tree, verb, buildingCommand);
+                ICommand buildingCommand =  BuildCommand(tree, verb);
 
                 if (parsedCommand == null) parsedCommand = buildingCommand;
                 else parsedCommand.AddFollowUpCommand(buildingCommand);
@@ -46,20 +45,11 @@ namespace SpaceMUD.CommandParser.TreeParser
             return parsedCommand;
         }
 
-        private void BuildCommand(IWordTree tree, Node.INode verb, ICommand buildingCommand)
+        private ICommand BuildCommand(IWordTree tree, Node.INode verb)
         {
-            Type commandType = null;
-
-            foreach (var commType in CommandsTypelList)
-            {
-                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Value.Value))
-                {
-                    commandType = commType;
-                    break;
-                }
-            }
-
-            buildingCommand = (ICommand)Activator.CreateInstance(commandType);
+            ICommand command = null;
+            Type commandType = FindCommandType(verb);
+            command = (ICommand)Activator.CreateInstance(commandType);
 
             bool reachedNode = false;
             foreach (var leaf in tree.ParseTree())
@@ -74,28 +64,45 @@ namespace SpaceMUD.CommandParser.TreeParser
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Verb) break;
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Adverb)
                 {
-                    buildingCommand.RawData.AdverbValues.Add(leaf.Value.Value);
+                    command.RawData.AdverbValues.Add(leaf.Value.Value);
                 }
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Equalizer)
                 {
-                    buildingCommand.RawData.Values.Add(leaf.Left.Value.Value, leaf.Right.Value.Value);
+                    command.RawData.Values.Add(leaf.Left.Value.Value, leaf.Right.Value.Value);
                     tree.GetEnumerator().MoveNext();
                     tree.GetEnumerator().MoveNext();//skip over the two added values.
                 }
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Adjective)
                 {
-                    buildingCommand.RawData.Values.Add((countUnknown++).ToString(), leaf.Value.Value);
+                    command.RawData.Values.Add((countUnknown++).ToString(), leaf.Value.Value);
                 }
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Noun)
                 {
                     if (leaf.Left != null && leaf.Left.Value.PartOfSpeechType == WordTypeEnum.Adjective)
                     {
-                        buildingCommand.RawData.Values.Add((countUnknown++).ToString(), leaf.Left.Value.Value + " " + leaf.Value.Value);
+                        command.RawData.Values.Add((countUnknown++).ToString(), leaf.Left.Value.Value + " " + leaf.Value.Value);
                         tree.GetEnumerator().MoveNext();
                     }
                 }
                 if (leaf.Value.PartOfSpeechType == WordTypeEnum.Preposition) continue;
             }
+            return command;
+        }
+
+        private Type FindCommandType(Node.INode verb)
+        {
+            Type commandType = null;
+
+            foreach (var commType in CommandsTypelList)
+            {
+                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Value.Value))
+                {
+                    commandType = commType;
+                    break;
+                }
+            }
+
+            return commandType;
         }
 
         private IWordTree ParseTree(string command)
