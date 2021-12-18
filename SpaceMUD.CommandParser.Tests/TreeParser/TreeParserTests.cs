@@ -60,9 +60,9 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
         [TestMethod]
         public void TestTreeParser_SentenceWithXWords_ContainsXLeafsInTree()
         {
-            Random rng = new Random(10);
+            Random rng = new Random();
             string command = "login";
-            int count = rng.Next();
+            int count = rng.Next(10);
             for (int i = 0; i < count; i++)
                 command += " testX";
 
