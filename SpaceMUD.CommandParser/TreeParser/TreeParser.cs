@@ -15,6 +15,9 @@ namespace SpaceMUD.CommandParser.TreeParser
     public class TreeParser : ICommandParser
     {
         public ILexic Lexic { get; }
+
+        public IWordTree Tree { get; private set; }
+
         private readonly IEnumerable<Type> CommandsTypelList;
 
         public TreeParser(ILexic lexic)
@@ -29,19 +32,19 @@ namespace SpaceMUD.CommandParser.TreeParser
         public ICommand ParseCommand(string command)
         {
             ICommand parsedCommand = null;
-            var tree = ParseTree(command);
-            var verbs = tree.GetParts(WordTypeEnum.Verb);
+            var parseTree = ParseTree(command);
+            var verbs = parseTree.GetParts(WordTypeEnum.Verb);
             for(int i=0; i<verbs.Count(); i++)
             {
                 var verb = verbs.ElementAt(i);
 
-                ICommand buildingCommand =  BuildCommand(tree, verb);
+                ICommand buildingCommand =  BuildCommand(parseTree, verb);
 
                 if (parsedCommand == null) parsedCommand = buildingCommand;
                 else parsedCommand.AddFollowUpCommand(buildingCommand);
             }
 
-
+            Tree = parseTree;
             return parsedCommand;
         }
 

@@ -34,5 +34,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Base
         /// <param name="wordType">The Word type of which node to be retrieved.</param>
         /// <returns></returns>
         IEnumerable<INode> GetParts(WordTypeEnum wordType);
+
+        int Count();
     }
 }

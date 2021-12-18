@@ -113,5 +113,13 @@ namespace SpaceMUD.CommandParser.TreeParser
 
             return parts;
         }
+
+        public int Count()
+        {
+            var list = new List<INode>();
+            var nodes = RootNode?.Traverse(list);
+
+            return list.Count;
+        }
     }
 }

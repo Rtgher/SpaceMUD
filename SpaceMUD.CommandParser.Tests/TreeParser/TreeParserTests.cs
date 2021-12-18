@@ -56,5 +56,20 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
             var parsedCommand = parser.ParseCommand(command);
             Assert.IsNotNull(parsedCommand.RawData.Values);
         }
+
+        [TestMethod]
+        public void TestTreeParser_SentenceWithXWords_ContainsXLeafsInTree()
+        {
+            Random rng = new Random(10);
+            string command = "login";
+            int count = rng.Next();
+            for (int i = 0; i < count; i++)
+                command += " testX";
+
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+
+            Assert.AreEqual(count + 1, parser.Tree.Count());
+        }
     }
 }

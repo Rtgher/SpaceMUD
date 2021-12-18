@@ -10,7 +10,7 @@ using SpaceMUD.Common.Tools.Attributes.Parser;
 
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
-    [Verb(TargetType.Default, "log in", "login")]
+    [Verb(TargetType.DataField, "log in", "login")]
     public class LoginCommand : BaseCommand
     {
         public override CommandsType Type { get; } = CommandsType.Configuration;

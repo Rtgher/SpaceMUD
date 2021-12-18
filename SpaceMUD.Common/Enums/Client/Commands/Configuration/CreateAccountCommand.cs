@@ -6,7 +6,7 @@ using System;
 
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
-    [Verb(TargetType.Default, "Create", "createaccount")]
+    [Verb(TargetType.DataField, "Create", "createaccount")]
     public class CreateAccountCommand : BaseCommand
     {
         public override CommandsType Type { get; } = CommandsType.Configuration;
