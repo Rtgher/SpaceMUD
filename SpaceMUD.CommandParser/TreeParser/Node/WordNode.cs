@@ -39,7 +39,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     switch (node.Value.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
-                            throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node.Value} after {Value}.");
+                            throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node?.Value?.Value} after {Value?.Value}.");
                             break;
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adjective:

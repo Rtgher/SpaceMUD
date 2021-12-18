@@ -17,6 +17,6 @@
         /// <summary>
         /// EQUALS, ==, =
         /// </summary>
-        Equalizer
+        Equalizer = 64
     }
 }

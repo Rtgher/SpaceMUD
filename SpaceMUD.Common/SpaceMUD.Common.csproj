@@ -89,7 +89,7 @@
     <Compile Include="Tools\Attributes\Parser\AdverbAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\ConjunctionAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\EqualizerAttribute.cs" />
-    <Compile Include="Tools\Attributes\Parser\ImplicitWords\EqualizerAttribute.cs" />
+    <Compile Include="Tools\Attributes\Parser\ImplicitWords\EqualizerClass.cs" />
     <Compile Include="Tools\Attributes\Parser\NounAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\PartOfSpeechAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\VerbAttribute.cs" />

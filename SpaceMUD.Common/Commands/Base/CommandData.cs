@@ -8,7 +8,7 @@ namespace SpaceMUD.Common.Commands.Base
 {
     public class CommandData
     {
-        public Dictionary<string, string> Values { get; set; }
+        public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
         public List<string> AdverbValues { get; } = new List<string>();
         protected void ExtractData(dynamic processedData)
         {

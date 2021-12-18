@@ -24,7 +24,7 @@ namespace SpaceMUD.CommandParser.Dictionary
             Lexic = new Dictionary<char, List<Word>>();
             AddToLexic(typeof(CreateAccountCommand));
             AddToLexic(typeof(LoginCommand));
-            AddToLexic(typeof(EqualizerAttribute));
+            AddToLexic(typeof(EqualizerClass));
         }
 
         public void AddToLexic(Type type)

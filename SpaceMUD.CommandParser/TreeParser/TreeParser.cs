@@ -53,11 +53,11 @@ namespace SpaceMUD.CommandParser.TreeParser
             ICommand command = null;
             Type commandType = FindCommandType(verb);
             command = (ICommand)Activator.CreateInstance(commandType);
+            int countUnknown = 0;
 
             bool reachedNode = false;
             foreach (var leaf in tree.ParseTree())
             {
-                int countUnknown = 0;
                 if (leaf == verb)
                 {
                     reachedNode = true;
