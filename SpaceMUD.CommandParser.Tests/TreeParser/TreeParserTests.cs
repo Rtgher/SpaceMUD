@@ -2,9 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpaceMUD.CommandParser.Dependency;
 using SpaceMUD.CommandParser.Base;
-using SpaceMUD.CommandParser.TreeParser;
 using SpaceMUD.Common.Commands.Base;
 using SpaceMUD.Common.Enums.Client.Commands.Configuration;
+using SpaceMUD.Common.Enums.Parser;
 
 namespace SpaceMUD.CommandParser.Tests.TreeParser
 {
@@ -55,6 +55,8 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
             var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
             var parsedCommand = parser.ParseCommand(command);
             Assert.IsNotNull(parsedCommand.RawData.Values);
+            Assert.IsNotNull(parser.Tree.SearchTree(WordTypeEnum.Adjective));
+            Assert.IsNotNull(parser.Tree.SearchTree(WordTypeEnum.Adjective, 2));
         }
 
         [TestMethod]

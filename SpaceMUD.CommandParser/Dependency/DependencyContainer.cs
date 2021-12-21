@@ -19,9 +19,9 @@ namespace SpaceMUD.CommandParser.Dependency
         public static IServiceCollection ConfigureServicesForTreeParser(this IServiceCollection self)
         {
             self.AddScoped<INode, WordNode>();
-            self.AddScoped<ICommandParser, TreeParser.TreeParser>();
+            self.AddTransient<ICommandParser, TreeParser.TreeParser>();
             self.AddScoped<ILexic, WordDictionary>();
-            self.AddScoped<IWordTree, WordTree>();
+            self.AddTransient<IWordTree, WordTree>();
             return self;
         }
     }
