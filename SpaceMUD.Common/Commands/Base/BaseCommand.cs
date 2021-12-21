@@ -12,7 +12,7 @@ namespace SpaceMUD.Common.Commands.Base
 
         public ICommand FollowUpCommand { get; private set; }
         public abstract CommandsType Type { get; }
-        public CommandData RawData { get; set; } = new CommandData();
+        public CommandData RawData { get; protected set; }
 
         public void AddFollowUpCommand(ICommand command)
         {

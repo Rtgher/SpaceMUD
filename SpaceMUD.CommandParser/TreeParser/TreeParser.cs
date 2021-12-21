@@ -82,7 +82,14 @@ namespace SpaceMUD.CommandParser.TreeParser
                 {
                     if (leaf.Left != null && leaf.Left.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                     {
-                        command.RawData.UnspecifiedArguments.Add(leaf.Left.Content.Value + " " + leaf.Content.Value);
+                        if (((NounAttribute)leaf.Content.Attribute).IsType == Common.Enums.Data.Functional.TargetType.DataField)
+                        {
+                            command.RawData.Values.Add(leaf.Content.Value, leaf.Left.Content.Value);
+                        }
+                        else
+                        {
+                            command.RawData.UnspecifiedArguments.Add($"{leaf.Left.Content.Value} {leaf.Content.Value}");
+                        }
                         tree.GetEnumerator().MoveNext();
                     }
                 }
@@ -111,7 +118,7 @@ namespace SpaceMUD.CommandParser.TreeParser
         {
 
             IWordTree tree =  Dependency.DependencyContainer.Provider.GetService(typeof(IWordTree)) as IWordTree;
-            var words = command.Split();
+            var words = command.Split();//TODO: change to a smarter regex split.
             for (int i = 0; i < words.Length; i++)
             {
                 var word = words[i];

@@ -14,5 +14,20 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
     public class LoginCommand : BaseCommand
     {
         public override CommandsType Type { get; } = CommandsType.Configuration;
+        public LoginCommand()
+        {
+            RawData = new LoginCommandData();
+        }
+
+        public LoginCommandData ProcessedData
+        {
+            get
+            {
+                if (_processedData == null)
+                    _processedData = ((LoginCommandData)RawData).FormatRawData();
+                return _processedData;
+            }
+        }
+        private LoginCommandData _processedData = null;
     }
 }

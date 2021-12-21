@@ -92,6 +92,7 @@
     <Compile Include="Tools\Attributes\Parser\ImplicitWords\EqualizerClass.cs" />
     <Compile Include="Tools\Attributes\Parser\NounAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\PartOfSpeechAttribute.cs" />
+    <Compile Include="Tools\Attributes\Parser\PropertyAttributes\OrderAttribute.cs" />
     <Compile Include="Tools\Attributes\Parser\VerbAttribute.cs" />
     <Compile Include="Tools\DirectoryHelper.cs" />
     <Compile Include="Tools\Extensions\AttributeExtensions.cs" />

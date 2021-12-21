@@ -73,5 +73,17 @@ namespace SpaceMUD.CommandParser.Tests.TreeParser
 
             Assert.AreEqual(count + 1, parser.Tree.Count());
         }
+
+        [TestMethod]
+        public void TestTreeParser_SentenceWithEqualizerAttribute_AssignsCorrectData()
+        {
+            string command = "create username=testUsername PassWord:testPassword";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var parsedCommand = parser.ParseCommand(command);
+
+            var createAccCommand = parsedCommand as CreateAccountCommand;
+            Assert.AreEqual("testUsername", createAccCommand.ProcessedData.Username);
+            Assert.AreEqual("testPassword", createAccCommand.ProcessedData.UnEncodedPassword);
+        }
     }
 }

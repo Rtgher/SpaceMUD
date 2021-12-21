@@ -6,18 +6,26 @@ using System;
 
 namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
 {
-    [Verb(TargetType.DataField, "Create", "createaccount")]
+    [Verb(TargetType.DataField, "Create", "createaccount", "create account", "create acc")]
     public class CreateAccountCommand : BaseCommand
     {
         public override CommandsType Type { get; } = CommandsType.Configuration;
 
+        public CreateAccountCommand()
+        {
+            RawData = new CreateAccountCommandData();
+        }
+
         public CreateAccountCommandData ProcessedData
         {
-            get =>((CreateAccountCommandData) RawData).FormatRawData();
+            get
+            {
+                if (_processedData==null)
+                    _processedData = ((CreateAccountCommandData)RawData).FormatRawData();
+                return _processedData;
+            }
         }
         private CreateAccountCommandData _processedData = null;
-        
-
         
     }
 }
