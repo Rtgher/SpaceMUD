@@ -82,7 +82,7 @@ namespace SpaceMUD.CommandParser.TreeParser
                 {
                     if (leaf.Left != null && leaf.Left.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                     {
-                        command.RawData.UnspecifiedArguments.Add((countUnknown++).ToString(), leaf.Left.Content.Value + " " + leaf.Content.Value);
+                        command.RawData.UnspecifiedArguments.Add(leaf.Left.Content.Value + " " + leaf.Content.Value);
                         tree.GetEnumerator().MoveNext();
                     }
                 }

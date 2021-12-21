@@ -14,6 +14,7 @@ namespace SpaceMUD.Common.Enums.Client.CommandData
         {
             var processedData = new CreateAccountCommandData();
             ExtractData(processedData);
+            if(Values.ContainsKey(0.ToString()))
             return processedData;
         }
     }
