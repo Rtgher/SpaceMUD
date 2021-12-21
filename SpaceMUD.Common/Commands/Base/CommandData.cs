@@ -11,11 +11,12 @@ namespace SpaceMUD.Common.Commands.Base
         public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
         public List<string> UnspecifiedArguments { get; } = new List<string>();
         public List<string> AdverbValues { get; } = new List<string>();
-        protected void ExtractData(dynamic processedData)
+
+        protected static void ExtractData(dynamic processedData)
         {
             var members = ((Type)processedData.GetType()).GetProperties(System.Reflection.BindingFlags.SetProperty);
 
-            foreach (var pair in Values)
+            foreach (var pair in processedData.Values)
             {
                 foreach (var memberInfo in members)
                 {
