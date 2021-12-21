@@ -11,14 +11,14 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
 
         public WordNode(Word value)
         {
-            Value = value;
+            Content = value;
         }
         public WordNode(Word value, WordNode parent) : this(value)
         {
             Parent = parent;
         }
 
-        public Word Value { get; private set; }
+        public Word Content { get; private set; }
 
         public INode Parent { get; set; }
 
@@ -33,13 +33,13 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         /// <returns>The tree root.</returns>
         public INode AddNode(INode node)
         {
-            switch (Value.PartOfSpeechType)
+            switch (Content.PartOfSpeechType)
             {
                 case WordTypeEnum.Verb:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
-                            throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node?.Value?.Value} after {Value?.Value}.");
+                            throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node?.Content?.Value} after {Content?.Value}.");
                             break;
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adjective:
@@ -59,7 +59,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Noun:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                         case WordTypeEnum.Noun:
@@ -78,7 +78,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Adverb:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                             SetAsParent(node);
@@ -98,7 +98,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Adjective:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                             AddToRight(node);
@@ -123,7 +123,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Preposition:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                         case WordTypeEnum.Noun:
@@ -140,7 +140,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Conjuction:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                         case WordTypeEnum.Noun:
@@ -169,14 +169,14 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                     }
                     break;
                 case WordTypeEnum.Equalizer:
-                    switch (node.Value.PartOfSpeechType)
+                    switch (node.Content.PartOfSpeechType)
                     {
                         case WordTypeEnum.Verb:
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adverb:
                         case WordTypeEnum.Adjective:
                         case WordTypeEnum.Preposition:
-                            if (Left == null || (Left.Value.PartOfSpeechType == WordTypeEnum.Preposition && Left.Right == null)) AddToLeft(node);
+                            if (Left == null || (Left.Content.PartOfSpeechType == WordTypeEnum.Preposition && Left.Right == null)) AddToLeft(node);
                             else AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:

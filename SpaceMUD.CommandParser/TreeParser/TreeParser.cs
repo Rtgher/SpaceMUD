@@ -53,7 +53,6 @@ namespace SpaceMUD.CommandParser.TreeParser
             ICommand command = null;
             Type commandType = FindCommandType(verb);
             command = (ICommand)Activator.CreateInstance(commandType);
-            int countUnknown = 0;
 
             bool reachedNode = false;
             foreach (var leaf in tree.ParseTree())
@@ -64,30 +63,30 @@ namespace SpaceMUD.CommandParser.TreeParser
                     continue;
                 }
                 if (!reachedNode) continue;//we only want to check the nodes in between the current verb node and the next verb node.
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Verb) break;
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Adverb)
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Verb) break;
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Adverb)
                 {
-                    command.RawData.AdverbValues.Add(leaf.Value.Value);
+                    command.RawData.AdverbValues.Add(leaf.Content.Value);
                 }
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Equalizer)
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Equalizer)
                 {
-                    command.RawData.Values.Add(leaf.Left.Value.Value, leaf.Right.Value.Value);
+                    command.RawData.Values.Add(leaf.Left.Content.Value, leaf.Right.Content.Value);
                     tree.GetEnumerator().MoveNext();
                     tree.GetEnumerator().MoveNext();//skip over the two added values.
                 }
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Adjective)
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                 {
-                    command.RawData.Values.Add((countUnknown++).ToString(), leaf.Value.Value);
+                    command.RawData.UnspecifiedArguments.Add(leaf.Content.Value);
                 }
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Noun)
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Noun)
                 {
-                    if (leaf.Left != null && leaf.Left.Value.PartOfSpeechType == WordTypeEnum.Adjective)
+                    if (leaf.Left != null && leaf.Left.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                     {
-                        command.RawData.Values.Add((countUnknown++).ToString(), leaf.Left.Value.Value + " " + leaf.Value.Value);
+                        command.RawData.UnspecifiedArguments.Add((countUnknown++).ToString(), leaf.Left.Content.Value + " " + leaf.Content.Value);
                         tree.GetEnumerator().MoveNext();
                     }
                 }
-                if (leaf.Value.PartOfSpeechType == WordTypeEnum.Preposition) continue;
+                if (leaf.Content.PartOfSpeechType == WordTypeEnum.Preposition) continue;
             }
             return command;
         }
@@ -98,7 +97,7 @@ namespace SpaceMUD.CommandParser.TreeParser
 
             foreach (var commType in CommandsTypelList)
             {
-                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Value.Value))
+                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Content.Value))
                 {
                     commandType = commType;
                     break;

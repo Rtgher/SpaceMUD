@@ -60,8 +60,8 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         private INode SearchWords(INode node, WordTypeEnum typeEnum, int count, ref int actualCount)
         {
-            if (node.Value == null) return null;
-            if (node.Value.PartOfSpeechType == typeEnum)
+            if (node.Content == null) return null;
+            if (node.Content.PartOfSpeechType == typeEnum)
             {
                 actualCount++;
                 if (actualCount == count) return node;
@@ -82,8 +82,8 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         private INode SearchWords(INode node, Word word)
         {
-            if (node.Value == null) return null;
-            if (node.Value.Equals(word)) return node;
+            if (node.Content == null) return null;
+            if (node.Content.Equals(word)) return node;
             if (node.Left != null)
             {
                 var returnLeft = SearchWords(node.Left, word);
@@ -105,7 +105,7 @@ namespace SpaceMUD.CommandParser.TreeParser
 
             foreach(var leaf in nodes)
             {
-                if(leaf.Value.PartOfSpeechType == wordType)
+                if(leaf.Content.PartOfSpeechType == wordType)
                 {
                     parts.Add(leaf);
                 }

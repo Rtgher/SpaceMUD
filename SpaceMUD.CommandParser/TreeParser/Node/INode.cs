@@ -9,7 +9,7 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
 {
     public interface INode
     {
-        Word Value
+        Word Content
         {
             get;
         }
