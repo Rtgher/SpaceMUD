@@ -9,6 +9,8 @@ using SpaceMUD.Common.Enums.Client.Commands.Configuration;
 using SpaceMUD.Common.Enums.Parser;
 using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
+using System.Text.RegularExpressions;
+using SpaceMUD.CommandParser.Constants;
 
 namespace SpaceMUD.CommandParser.TreeParser
 {
@@ -32,7 +34,7 @@ namespace SpaceMUD.CommandParser.TreeParser
         public ICommand ParseCommand(string command)
         {
             ICommand parsedCommand = null;
-            var parseTree = ParseTree(command);
+            var parseTree = ParseTree(command.ToLowerInvariant());
             var verbs = parseTree.GetParts(WordTypeEnum.Verb);
             for(int i=0; i<verbs.Count(); i++)
             {
@@ -43,8 +45,9 @@ namespace SpaceMUD.CommandParser.TreeParser
                 if (parsedCommand == null) parsedCommand = buildingCommand;
                 else parsedCommand.AddFollowUpCommand(buildingCommand);
             }
-
+            if (parsedCommand == null) parsedCommand = new InvalidCommand(null);
             Tree = parseTree;
+            parsedCommand.CommandString = command;
             return parsedCommand;
         }
 
@@ -104,7 +107,7 @@ namespace SpaceMUD.CommandParser.TreeParser
 
             foreach (var commType in CommandsTypelList)
             {
-                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Content.Value))
+                if (commType.GetAttribute<PartOfSpeechAttribute>().Synonyms.Contains(verb.Content.Value, StringComparer.InvariantCultureIgnoreCase))
                 {
                     commandType = commType;
                     break;
@@ -116,11 +119,12 @@ namespace SpaceMUD.CommandParser.TreeParser
 
         private IWordTree ParseTree(string command)
         {
-
             IWordTree tree =  Dependency.DependencyContainer.Provider.GetService(typeof(IWordTree)) as IWordTree;
-            var words = command.Split();//TODO: change to a smarter regex split.
+            var words = Regex.Split(command, CommandParserConstants.TokenRegexSplitBy);
+            words = words.Select(s => s.Trim()).ToArray();
             for (int i = 0; i < words.Length; i++)
             {
+                if (words[i] == string.Empty) continue;
                 var word = words[i];
                 if (i + 1 < words.Length)
                 {
