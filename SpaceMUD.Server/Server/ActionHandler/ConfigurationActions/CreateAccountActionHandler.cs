@@ -17,10 +17,7 @@ namespace SpaceMUD.Server.ActionHandler.ConfigurationActions
 
         public MUSAction HandleAction(IConnection conn, MessageReceivedArgs args)
         {
-            _command = new CreateAccountCommand()
-            {
-                RawData = new Common.Commands.Base.CommandData()
-            };
+            _command = new CreateAccountCommand();
 
             if (conn.Account != null)
             {

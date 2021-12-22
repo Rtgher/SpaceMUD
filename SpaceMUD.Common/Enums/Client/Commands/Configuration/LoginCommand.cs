@@ -19,6 +19,13 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
             RawData = new LoginCommandData();
         }
 
+        public LoginCommand(string username, string passwordUnEncrypted, bool isActionComplete)
+        {
+            this.username = username;
+            this.passwordUnEncrypted = passwordUnEncrypted;
+            this.isActionComplete = isActionComplete;
+        }
+
         public LoginCommandData ProcessedData
         {
             get
@@ -29,5 +36,8 @@ namespace SpaceMUD.Common.Enums.Client.Commands.Configuration
             }
         }
         private LoginCommandData _processedData = null;
+        private string username;
+        private string passwordUnEncrypted;
+        private bool isActionComplete;
     }
 }

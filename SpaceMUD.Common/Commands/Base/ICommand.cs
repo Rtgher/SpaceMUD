@@ -10,5 +10,6 @@ namespace SpaceMUD.Common.Commands.Base
         CommandData RawData { get; }
         ICommand FollowUpCommand { get; }
         void AddFollowUpCommand(ICommand command);
+        string CommandString { get; set; }
     }
 }
