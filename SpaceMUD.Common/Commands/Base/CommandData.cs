@@ -16,7 +16,6 @@ namespace SpaceMUD.Common.Commands.Base
         public List<string> AdverbValues { get; } = new List<string>();
         private static ILog Log = Dependency.DependencyContainer.Provider.GetService(typeof(ILog)) as ILog;
 
-
         protected static void ExtractData(dynamic data)
         {
             Type type = (Type)data.GetType();
