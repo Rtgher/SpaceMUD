@@ -121,7 +121,8 @@ namespace SpaceMUD.CommandParser.TreeParser
         {
             IWordTree tree =  Dependency.DependencyContainer.Provider.GetService(typeof(IWordTree)) as IWordTree;
             var words = Regex.Split(command, CommandParserConstants.TokenRegexSplitBy);
-            words = words.Select(s => s.Trim()).ToArray();
+            words = words.Where(s=> s!=string.Empty && !String.IsNullOrWhiteSpace(s)).ToArray();
+            
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i] == string.Empty) continue;
