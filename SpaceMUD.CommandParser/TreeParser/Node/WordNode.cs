@@ -104,7 +104,9 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             AddToRight(node);
                             break;
                         case WordTypeEnum.Noun:
-                            SetAsParent(node);
+                            if (Parent != null && (Parent.Content.PartOfSpeechType == WordTypeEnum.Equalizer || Parent.Content.PartOfSpeechType == WordTypeEnum.Noun))
+                                AddToRight(node);
+                            else SetAsParent(node);
                             return Parent;
                             break;
                         case WordTypeEnum.Adverb:

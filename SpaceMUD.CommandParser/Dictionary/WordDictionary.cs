@@ -10,6 +10,7 @@ using SpaceMUD.Common.Tools.Extensions;
 using SpaceMUD.Entities.Base;
 using SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords;
 using SpaceMUD.CommandParser.Base;
+using SpaceMUD.Common.Enums.Client.CommandData;
 
 namespace SpaceMUD.CommandParser.Dictionary
 {
@@ -23,16 +24,28 @@ namespace SpaceMUD.CommandParser.Dictionary
         {
             Lexic = new Dictionary<char, List<Word>>();
             AddToLexic(typeof(CreateAccountCommand));
+            AddToLexic(typeof(CreateAccountCommandData));
             AddToLexic(typeof(LoginCommand));
+            AddToLexic(typeof(LoginCommandData));
             AddToLexic(typeof(EqualizerClass));
+            
         }
 
         public void AddToLexic(Type type)
         {
             var partOfSpeech = type.GetAttribute<PartOfSpeechAttribute>();
+            var decoratedPropertyAttributes = from property in type.GetProperties()
+                                      where Attribute.IsDefined(property, typeof(PartOfSpeechAttribute))
+                                      select property.GetCustomAttributes(typeof(PartOfSpeechAttribute), false).First() as PartOfSpeechAttribute;
             if (partOfSpeech == null)
+            {
                 _log.LogWarning($"Tried to get a partofspeech attribute from Type '{type.Name}' but got nothing.");
-            AddToLexic(partOfSpeech);
+            }
+            else
+            {
+                AddToLexic(partOfSpeech);
+            }
+            foreach (var propAtt in decoratedPropertyAttributes) AddToLexic(propAtt);
         }
 
         public void AddToLexic(IEnumerable<GameObject> objects)
@@ -66,7 +79,7 @@ namespace SpaceMUD.CommandParser.Dictionary
         public PartOfSpeechAttribute FindInLexic(string word)
         {
             var searchItem = word.Trim();
-            var startingChar = word[0];
+            var startingChar = Char.ToLowerInvariant(word[0]);
             if (!Lexic.ContainsKey(startingChar)) return null;
 
             var registeredWords = Lexic[startingChar];
@@ -96,7 +109,7 @@ namespace SpaceMUD.CommandParser.Dictionary
 
         private void AddToLexic(string word, PartOfSpeechAttribute attribute)
         {
-            char startChar = word.TrimStart().FirstOrDefault();
+            char startChar = word.ToLowerInvariant().TrimStart().First();
             if (word.Contains(MultiWord)) startChar = MultiWord;
             if(Lexic.ContainsKey(startChar))
             {
