@@ -19,6 +19,6 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
         //Add a new Node
         INode AddNode(INode node);
         IEnumerable<INode> Traverse(IList<INode> list);
-
+        bool Remove(INode wordNode);
     }
 }

@@ -118,6 +118,10 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             break;
                         case WordTypeEnum.Conjuction:
                         case WordTypeEnum.Equalizer:
+                            if(Parent!=null && Parent.Content.PartOfSpeechType== WordTypeEnum.Equalizer)
+                            {
+                                AddToRight(node);
+                            }else
                             SetAsParent(node);
                             break;
                     }
@@ -180,10 +184,16 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
                             else AddToRight(node);
                             break;
                         case WordTypeEnum.Conjuction:
+                            if (Right != null) { Right.AddNode(node); break; }
                             throw new InvalidSyntaxException("Cannot have an conjunction after an equalizer symbol!");
                             break;
                         case WordTypeEnum.Equalizer:
-                            throw new InvalidSyntaxException("Cannot have an equalizer symbol after an equalizer symbol!");
+                            if (Right != null)
+                            {
+                                Right.AddNode(node);
+                                break;
+                            }
+                            throw new InvalidSyntaxException("Cannot have an equalizer symbol after an equalizer symbol! Expecting full 'item=value' syntax!'");
                             break;
                     }
                     break;
@@ -193,7 +203,14 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
 
         private void SetAsParent(INode node)
         {
-            if (this.Parent != null) Parent.AddNode(node);
+
+            if (this.Parent != null)
+            {
+                var oldParent = Parent;
+                oldParent.Remove(this);
+                Parent = node;
+                oldParent.AddNode(node);
+            }
             else Parent = node;
 
             Parent.AddNode(this);
@@ -224,6 +241,24 @@ namespace SpaceMUD.CommandParser.TreeParser.Node
             if (Left!=null) Left.Traverse(list);
             if (Right != null) Right.Traverse(list);
             return list;
+        }
+
+        public bool Remove(INode wordNode)
+        {
+            if (Left == wordNode)
+            {
+                Left = null;
+                return true;
+            }
+            if (Right == wordNode)
+            {
+                Right = null;
+                return true;
+            }
+            if (Left!=null && Left.Remove(wordNode)) return true;
+            if (Right!=null && Right.Remove(wordNode)) return true;
+
+            return false;
         }
     }
 }

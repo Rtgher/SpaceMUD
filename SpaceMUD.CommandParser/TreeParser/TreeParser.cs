@@ -34,7 +34,7 @@ namespace SpaceMUD.CommandParser.TreeParser
         public ICommand ParseCommand(string command)
         {
             ICommand parsedCommand = null;
-            var parseTree = ParseTree(command.ToLowerInvariant());
+            var parseTree = ParseTree(command);
             var verbs = parseTree.GetParts(WordTypeEnum.Verb);
             for(int i=0; i<verbs.Count(); i++)
             {
@@ -58,8 +58,10 @@ namespace SpaceMUD.CommandParser.TreeParser
             command = (ICommand)Activator.CreateInstance(commandType);
 
             bool reachedNode = false;
-            foreach (var leaf in tree.ParseTree())
+            var parsedTree = tree.ParseTree().ToList();
+            for(int i=0;i<parsedTree.Count();i++)
             {
+                var leaf = parsedTree[i];
                 if (leaf == verb)
                 {
                     reachedNode = true;
@@ -73,9 +75,8 @@ namespace SpaceMUD.CommandParser.TreeParser
                 }
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Equalizer)
                 {
-                    command.RawData.Values.Add(leaf.Left.Content.Value, leaf.Right.Content.Value);
-                    tree.GetEnumerator().MoveNext();
-                    tree.GetEnumerator().MoveNext();//skip over the two added values.
+                    command.RawData.Values.Add(leaf.Left.Content.Value.ToLowerInvariant(), leaf.Right.Content.Value);
+                    i+=2;//skip over the two added values.
                 }
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                 {
@@ -93,7 +94,7 @@ namespace SpaceMUD.CommandParser.TreeParser
                         {
                             command.RawData.UnspecifiedArguments.Add($"{leaf.Left.Content.Value} {leaf.Content.Value}");
                         }
-                        tree.GetEnumerator().MoveNext();
+                        i++;
                     }
                 }
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Preposition) continue;

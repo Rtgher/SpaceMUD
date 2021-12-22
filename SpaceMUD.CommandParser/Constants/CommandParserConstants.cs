@@ -8,6 +8,6 @@ namespace SpaceMUD.CommandParser.Constants
 {
     public static class CommandParserConstants
     {
-        public const string TokenRegexSplitBy = @"(\w+'*[\w])|[\'\=\-\:]";
+        public const string TokenRegexSplitBy = "\\b";
     }
 }
