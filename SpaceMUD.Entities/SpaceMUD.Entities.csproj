@@ -83,5 +83,8 @@
     <Folder Include="Actors\NonCombatant\" />
     <Folder Include="Items\Decoratives\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
