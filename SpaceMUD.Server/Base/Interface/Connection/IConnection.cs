@@ -22,6 +22,7 @@ namespace SpaceMUD.Server.Base.Interface.Connection
         void PrepareUpdate(string message);
         void Update();
         ICommand ExecutingCommand { get; set; }
+        bool IsExecutingACommand { get; }
         Account Account { get; set; }
         event EventHandler<MessageReceivedArgs> MessageReceived;
     }

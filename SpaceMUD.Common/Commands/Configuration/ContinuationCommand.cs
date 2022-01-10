@@ -11,5 +11,9 @@ namespace SpaceMUD.Common.Commands.Configuration
     public class ContinuationCommand : BaseCommand
     {
         public override CommandsType Type => CommandsType.Configuration;
+        public ContinuationCommand()
+        {
+            RawData = new();
+        }
     }
 }

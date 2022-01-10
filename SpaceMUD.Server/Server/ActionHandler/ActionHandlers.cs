@@ -39,6 +39,16 @@ namespace SpaceMUD.Server.ActionHandler
                 }
             }
 
+            if (conn.IsExecutingACommand)
+            {
+                if(command is ContinuationCommand)
+                {
+                   conn.ExecutingCommand.ContinueCommand(command);
+                }else if(conn.ExecutingCommand.Type == command.Type)
+                {
+                    conn.ExecutingCommand.ContinueCommand(command);    
+                }
+            }
             return null;
         }
     }

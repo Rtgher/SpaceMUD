@@ -57,5 +57,12 @@ namespace SpaceMUD.Common.Commands.Base
                 }
             }
         }
+
+        public void AppendData(CommandData commandData)
+        {
+            AdverbValues.AddRange(commandData.AdverbValues);
+            UnspecifiedArguments.AddRange(commandData.UnspecifiedArguments);
+            commandData.Values.ToList().ForEach(x => Values.Add(x.Key, x.Value));
+        }
     }
 }

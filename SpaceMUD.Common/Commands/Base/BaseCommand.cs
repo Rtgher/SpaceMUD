@@ -14,12 +14,19 @@ namespace SpaceMUD.Common.Commands.Base
         public abstract CommandsType Type { get; }
         public CommandData RawData { get; protected set; }
         public string CommandString { get; set; }
-        public bool Completed { get; set; } = false;
+        public bool Completed { get=>_completed && (bool)(FollowUpCommand?.Completed??true); set=> _completed = value; } 
+        private bool _completed = false;
 
         public void AddFollowUpCommand(ICommand command)
         {
             if (FollowUpCommand == null) FollowUpCommand = command;
             else FollowUpCommand.AddFollowUpCommand(command);
         }
+
+        public void ContinueCommand(ICommand command)
+        {
+            RawData.AppendData(command.RawData);
+        }
+
     }
 }

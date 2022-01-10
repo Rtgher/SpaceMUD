@@ -28,6 +28,8 @@ namespace SpaceMUD.Server.Connection
         public Account Account { get; set; } = null;
         public ICommand ExecutingCommand { get; set; } = null;
 
+        public bool IsExecutingACommand => ExecutingCommand != null && !ExecutingCommand.Completed;
+
         public event EventHandler<MessageReceivedArgs> MessageReceived;
 
         private bool _isRunning;
