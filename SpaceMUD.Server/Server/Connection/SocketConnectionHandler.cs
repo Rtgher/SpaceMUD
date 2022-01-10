@@ -6,6 +6,7 @@ using SpaceMUD.Common.Exceptions.Server;
 using SpaceMUD.Server.Base.Interface;
 using SpaceMUD.Entities.Network;
 using SpaceMUD.Server.Connection.Events;
+using SpaceMUD.Common.Commands.Base;
 
 namespace SpaceMUD.Server.Connection
 {
@@ -25,6 +26,8 @@ namespace SpaceMUD.Server.Connection
         }
 
         public Account Account { get; set; } = null;
+        public ICommand ExecutingCommand { get; set; } = null;
+
         public event EventHandler<MessageReceivedArgs> MessageReceived;
 
         private bool _isRunning;

@@ -5,12 +5,12 @@ using SpaceMUD.CommandParser.Base;
 using SpaceMUD.CommandParser.TreeParser.Base;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Commands.Base;
-using SpaceMUD.Common.Enums.Client.Commands.Configuration;
 using SpaceMUD.Common.Enums.Parser;
 using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
 using System.Text.RegularExpressions;
 using SpaceMUD.CommandParser.Constants;
+using SpaceMUD.Common.Commands.Configuration;
 
 namespace SpaceMUD.CommandParser.TreeParser
 {
@@ -36,14 +36,19 @@ namespace SpaceMUD.CommandParser.TreeParser
             ICommand parsedCommand = null;
             var parseTree = ParseTree(command);
             var verbs = parseTree.GetParts(WordTypeEnum.Verb);
-            for(int i=0; i<verbs.Count(); i++)
+            ICommand buildingCommand;
+            for (int i=0; i<verbs.Count(); i++)
             {
                 var verb = verbs.ElementAt(i);
 
-                ICommand buildingCommand =  BuildCommand(parseTree, verb);
+                buildingCommand = BuildCommand(parseTree, verb);
 
                 if (parsedCommand == null) parsedCommand = buildingCommand;
                 else parsedCommand.AddFollowUpCommand(buildingCommand);
+            }
+            if (verbs.Count() == 0 && parseTree.Count() != 0)
+            {
+                buildingCommand = BuildFollowUpCommand(parseTree);
             }
             if (parsedCommand == null) parsedCommand = new InvalidCommand(null);
             Tree = parseTree;
@@ -51,23 +56,33 @@ namespace SpaceMUD.CommandParser.TreeParser
             return parsedCommand;
         }
 
+        private ICommand BuildFollowUpCommand(IWordTree parseTree)
+        {
+            ICommand continuationCommand = new ContinuationCommand();
+            return ExtractTree(parseTree, null, continuationCommand);
+        }
+
         private ICommand BuildCommand(IWordTree tree, Node.INode verb)
         {
             ICommand command = null;
             Type commandType = FindCommandType(verb);
             command = (ICommand)Activator.CreateInstance(commandType);
+            return ExtractTree(tree, verb, command);
+        }
 
+        private static ICommand ExtractTree(IWordTree tree, Node.INode verb, ICommand command)
+        {
             bool reachedNode = false;
             var parsedTree = tree.ParseTree().ToList();
-            for(int i=0;i<parsedTree.Count();i++)
+            for (int i = 0; i < parsedTree.Count(); i++)
             {
                 var leaf = parsedTree[i];
-                if (leaf == verb)
+                if (leaf == verb && verb!=null)
                 {
                     reachedNode = true;
                     continue;
                 }
-                if (!reachedNode) continue;//we only want to check the nodes in between the current verb node and the next verb node.
+                if (!reachedNode && verb!=null) continue;//we only want to check the nodes in between the current verb node and the next verb node.
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Verb) break;
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Adverb)
                 {
@@ -76,7 +91,7 @@ namespace SpaceMUD.CommandParser.TreeParser
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Equalizer)
                 {
                     command.RawData.Values.Add(leaf.Left.Content.Value.ToLowerInvariant(), leaf.Right.Content.Value);
-                    i+=2;//skip over the two added values.
+                    i += 2;//skip over the two added values.
                 }
                 if (leaf.Content.PartOfSpeechType == WordTypeEnum.Adjective)
                 {

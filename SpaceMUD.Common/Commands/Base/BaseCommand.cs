@@ -14,6 +14,7 @@ namespace SpaceMUD.Common.Commands.Base
         public abstract CommandsType Type { get; }
         public CommandData RawData { get; protected set; }
         public string CommandString { get; set; }
+        public bool Completed { get; set; } = false;
 
         public void AddFollowUpCommand(ICommand command)
         {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceMUD.Base.Interface.ActionHandler;
+﻿using System.Collections.Generic;
+using SpaceMUD.CommandParser.Base;
+using SpaceMUD.Common.Commands.Configuration;
 using SpaceMUD.Server.Actions;
 using SpaceMUD.Server.Base.Interface.Connection;
 using SpaceMUD.Server.Connection.Events;
@@ -26,18 +23,18 @@ namespace SpaceMUD.Server.ActionHandler
 
         public MUSAction Delegate(IConnection conn, MessageReceivedArgs args)
         {
+            ICommandParser parser = CommandParser.Dependency.DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            var command = parser.ParseCommand(args.Message);
+
             if (args.Account == null) //if linked account is null we need to stop all other actions until we login. 
             {
-                if (args.Message.StartsWith("create", StringComparison.InvariantCultureIgnoreCase) || args.Message.StartsWith("create acc", StringComparison.InvariantCultureIgnoreCase))
+                if (command is CreateAccountCommand)
                 {
                     return MapActionsContainersToConnections[conn].CreateAccountActionHandler.HandleAction(conn, args);
                 }
-                else
+                
+                if(command is LoginCommand)
                 {
-                    if (args.Message.StartsWith("login", StringComparison.InvariantCultureIgnoreCase))
-                        args.Message = args.Message.Remove(0, 5).TrimStart();
-                    if (args.Message.StartsWith("log in", StringComparison.InvariantCultureIgnoreCase))
-                        args.Message = args.Message.Remove(0, 6).TrimStart();
                     return MapActionsContainersToConnections[conn].LoginActionHandler.HandleAction(conn, args);
                 }
             }
