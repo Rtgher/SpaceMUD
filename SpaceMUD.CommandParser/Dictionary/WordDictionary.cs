@@ -9,7 +9,6 @@ using SpaceMUD.Common.Tools.Extensions;
 using SpaceMUD.Entities.Base;
 using SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords;
 using SpaceMUD.CommandParser.Base;
-using SpaceMUD.Common.Enums.Client.CommandData;
 using SpaceMUD.Common.Commands.CommandData;
 using SpaceMUD.Common.Commands.Configuration;
 
