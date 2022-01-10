@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpaceMUD.CommandParser.Dependency;
 using SpaceMUD.CommandParser.Base;
 using SpaceMUD.Common.Commands.Base;
-using SpaceMUD.Common.Enums.Client.Commands.Configuration;
 using SpaceMUD.Common.Enums.Parser;
+using SpaceMUD.Common.Commands.Configuration;
 
 namespace SpaceMUD.CommandParser.Tests.TreeParser
 {

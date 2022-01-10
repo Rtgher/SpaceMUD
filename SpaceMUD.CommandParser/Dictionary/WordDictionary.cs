@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using SpaceMUD.CommandParser.TreeParser.Words;
 using SpaceMUD.Common.Dependency;
-using SpaceMUD.Common.Enums.Client.Commands.Configuration;
 using SpaceMUD.Common.Interfaces;
 using SpaceMUD.Common.Tools.Attributes.Parser;
 using SpaceMUD.Common.Tools.Extensions;
@@ -11,6 +10,8 @@ using SpaceMUD.Entities.Base;
 using SpaceMUD.Common.Tools.Attributes.Parser.ImplicitWords;
 using SpaceMUD.CommandParser.Base;
 using SpaceMUD.Common.Enums.Client.CommandData;
+using SpaceMUD.Common.Commands.CommandData;
+using SpaceMUD.Common.Commands.Configuration;
 
 namespace SpaceMUD.CommandParser.Dictionary
 {
