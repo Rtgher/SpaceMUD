@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <StartupObject>MUS.Server.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MUS.CommandParser\MUS.CommandParser.csproj" />
+    <ProjectReference Include="..\MUS.Common\MUS.Common.csproj" />
+    <ProjectReference Include="..\MUS.Database\MUS.Database.csproj" />
+    <ProjectReference Include="..\MUS.Entities\MUS.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

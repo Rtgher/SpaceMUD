@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Actors\Combatant\" />
+    <Folder Include="Actors\NonCombatant\" />
+    <Folder Include="Items\Decoratives\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MUS.Common\MUS.Common.csproj" />
+  </ItemGroup>
+
+</Project>
