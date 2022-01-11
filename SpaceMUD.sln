@@ -1,28 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B9FC2BC-3A8D-45E5-95BB-DA0CD5639C9F}"
 	ProjectSection(SolutionItems) = preProject
 		License.txt = License.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Common", "SpaceMUD.Common\SpaceMUD.Common.csproj", "{7A271C9F-D5BB-4517-8EE8-AFE8236E3376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.Common", "SpaceMUD.Common\SpaceMUD.Common.csproj", "{7A271C9F-D5BB-4517-8EE8-AFE8236E3376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Server", "SpaceMUD.Server\SpaceMUD.Server.csproj", "{7FD979FE-BFD5-4A25-A03E-A3B62A6EC477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.Server", "SpaceMUD.Server\SpaceMUD.Server.csproj", "{7FD979FE-BFD5-4A25-A03E-A3B62A6EC477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Database", "SpaceMUD.Database\SpaceMUD.Database.csproj", "{7F654E58-63AE-4C45-9113-24BFD01C76F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.Database", "SpaceMUD.Database\SpaceMUD.Database.csproj", "{7F654E58-63AE-4C45-9113-24BFD01C76F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Database.Tests", "Tests\SpaceMUD.Database.Tests\SpaceMUD.Database.Tests.csproj", "{A931C11E-7BB4-486A-9047-D0B9F885B9D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.Database.Tests", "Tests\SpaceMUD.Database.Tests\SpaceMUD.Database.Tests.csproj", "{A931C11E-7BB4-486A-9047-D0B9F885B9D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.Entities", "SpaceMUD.Entities\SpaceMUD.Entities.csproj", "{73C8BF39-1777-44CC-A9CC-8197022EDD9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.Entities", "SpaceMUD.Entities\SpaceMUD.Entities.csproj", "{73C8BF39-1777-44CC-A9CC-8197022EDD9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.CommandParser", "SpaceMUD.CommandParser\SpaceMUD.CommandParser.csproj", "{C2D3FFB9-207B-4D3A-83C2-2FFD1151EC74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.CommandParser", "SpaceMUD.CommandParser\SpaceMUD.CommandParser.csproj", "{C2D3FFB9-207B-4D3A-83C2-2FFD1151EC74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A65A81CF-18BC-4AB6-AA3E-16DB9EEDA6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMUD.CommandParser.Tests", "SpaceMUD.CommandParser.Tests\SpaceMUD.CommandParser.Tests.csproj", "{4CB15AB6-4735-4D7B-A986-65232256BF8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceMUD.CommandParser.Tests", "SpaceMUD.CommandParser.Tests\SpaceMUD.CommandParser.Tests.csproj", "{4CB15AB6-4735-4D7B-A986-65232256BF8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51CB428B-0344-44BD-BC3E-DCC721D41D36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,7 +65,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{7A271C9F-D5BB-4517-8EE8-AFE8236E3376} = {51CB428B-0344-44BD-BC3E-DCC721D41D36}
+		{7FD979FE-BFD5-4A25-A03E-A3B62A6EC477} = {51CB428B-0344-44BD-BC3E-DCC721D41D36}
+		{7F654E58-63AE-4C45-9113-24BFD01C76F5} = {51CB428B-0344-44BD-BC3E-DCC721D41D36}
 		{A931C11E-7BB4-486A-9047-D0B9F885B9D3} = {A65A81CF-18BC-4AB6-AA3E-16DB9EEDA6AE}
+		{73C8BF39-1777-44CC-A9CC-8197022EDD9E} = {51CB428B-0344-44BD-BC3E-DCC721D41D36}
+		{C2D3FFB9-207B-4D3A-83C2-2FFD1151EC74} = {51CB428B-0344-44BD-BC3E-DCC721D41D36}
 		{4CB15AB6-4735-4D7B-A986-65232256BF8A} = {A65A81CF-18BC-4AB6-AA3E-16DB9EEDA6AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
