@@ -2,10 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using MUS.Database.Repositor.FileRepository;
 using MUS.Database.Repositor.Base.Interface;
+using MUS.Common.Interfaces;
 
 namespace MUS.Database.Repositor
 {
-    internal static class DependencyContainer
+    public static class DependencyContainer
     {
         private static IServiceCollection _services = new ServiceCollection();
         private static IServiceProvider _provider;
@@ -18,6 +19,11 @@ namespace MUS.Database.Repositor
         {
             self.AddScoped(typeof(IRepository<>), typeof(FileRepository<>));
             return self;
+        }
+
+        public static IRepository<T> GetRepositoryFor<T>() where T : IDatabaseObject
+        {
+            return _provider.GetService<IRepository<T>>();   
         }
 
     }

@@ -20,5 +20,7 @@ namespace MUS.Common.Dependency
             self.AddSingleton<ILog>(new Logger(DirectoryHelper.GetInstalationDirectoryRoot().Parent.Parent.Parent.FullName + "/Logs/"));
             return self;
         }
+
+        public static ILog Log { get=> Provider.GetService<ILog>(); }
     }
 }
