@@ -12,19 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A65A81CF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{51CB428B-0344-44BD-BC3E-DCC721D41D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUS.CommandParser.Tests", "Tests\MUS.CommandParser.Tests\MUS.CommandParser.Tests.csproj", "{5412873D-BD39-4955-A483-6F409A2B1476}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.CommandParser.Tests", "Tests\MUS.CommandParser.Tests\MUS.CommandParser.Tests.csproj", "{5412873D-BD39-4955-A483-6F409A2B1476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUS.Common", "src\MUS.Common\MUS.Common.csproj", "{BBD9690A-5932-4854-A842-9F67E2F0FC67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.Common", "src\MUS.Common\MUS.Common.csproj", "{BBD9690A-5932-4854-A842-9F67E2F0FC67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUS.CommandParser", "src\MUS.CommandParser\MUS.CommandParser.csproj", "{044B61AF-9592-4C95-8E37-B73CA2193A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.CommandParser", "src\MUS.CommandParser\MUS.CommandParser.csproj", "{044B61AF-9592-4C95-8E37-B73CA2193A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MUS.Database", "src\MUS.Database\MUS.Database.csproj", "{895922AF-6525-471B-8A0A-19BBCE44B6EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.Database", "src\MUS.Database\MUS.Database.csproj", "{895922AF-6525-471B-8A0A-19BBCE44B6EF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.Server", "src\MUS.Server\MUS.Server.csproj", "{D25E571C-E1E0-43B2-BBE2-FE61429BCA75}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.Entities", "src\MUS.Entities\MUS.Entities.csproj", "{78CA1F34-A855-4F8F-93E7-D07BB56B492C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.Database.Tests", "Tests\MUS.Database.Tests\MUS.Database.Tests.csproj", "{CE554152-E2F1-4F02-A703-C7EDBD8C4B61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MUS.GameDriver", "src\MUS.GameDriver\MUS.GameDriver.csproj", "{7A991C55-6CA5-4E09-AA29-20CB52703E19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{CE554152-E2F1-4F02-A703-C7EDBD8C4B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE554152-E2F1-4F02-A703-C7EDBD8C4B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE554152-E2F1-4F02-A703-C7EDBD8C4B61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A991C55-6CA5-4E09-AA29-20CB52703E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A991C55-6CA5-4E09-AA29-20CB52703E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A991C55-6CA5-4E09-AA29-20CB52703E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A991C55-6CA5-4E09-AA29-20CB52703E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
