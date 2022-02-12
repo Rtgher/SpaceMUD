@@ -13,9 +13,9 @@ namespace MUS.Common.Interfaces
     /// </summary>
     public interface IGame
     {
-        void LoadCharacter(long playerCharacterId);
+        bool LoadCharacter(long playerCharacterId);
         void UnloadCharacter(long playerCharacterId);
-        void LoadLocation(long locationId);
+        bool LoadLocation(long locationId);
         void UnloadLocation(long locationId);
     }
 }

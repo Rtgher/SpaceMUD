@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MUS.Common\MUS.Common.csproj" />
+    <ProjectReference Include="..\MUS.Database\MUS.Database.csproj" />
     <ProjectReference Include="..\MUS.Entities\MUS.Entities.csproj" />
   </ItemGroup>
 
