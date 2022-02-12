@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using MUS.Entities.Trait.Descriptive.Base.IDo;
-using MUS.Entities.Trait.Functional.Base.IDo;
+﻿using MUS.Entities.Trait.Descriptive.Base.IDo;
 using MUS.Entities.Trait.Functional.Base.ICan;
+using MUS.Entities.Trait.Functional.Base.IDo;
+using System.Collections.Generic;
 
 namespace MUS.Entities.Base.Actor
 {

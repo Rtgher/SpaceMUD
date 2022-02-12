@@ -1,13 +1,8 @@
-﻿using MUS.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MUS.Common.Interfaces;
 using MUS.Common.Tools.Attributes.Parser;
-using MUS.Entities.Trait.Functional.Base.IDo;
 using MUS.Entities.Trait.Functional.Base.ICan;
-using MUS.Common.Interfaces;
+using MUS.Entities.Trait.Functional.Base.IDo;
+using System.Collections.Generic;
 
 namespace MUS.Entities.Trait.Descriptive.Races
 {

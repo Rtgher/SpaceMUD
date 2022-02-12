@@ -2,7 +2,6 @@
 using MUS.Entities.Actors.Player;
 using MUS.Entities.Base;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MUS.Entities.Network
 {

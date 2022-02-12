@@ -9,6 +9,6 @@ namespace MUS.Entities.Storage
     {
         public long KeyEntityId { get; set; }
         public bool IsLocked { get; set; }
-        
+
     }
 }

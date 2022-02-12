@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MUS.Common.Enums.Data.Functional;
+﻿using MUS.Common.Enums.Data.Functional;
 using MUS.Common.Tools.Attributes.Parser;
-using MUS.Entities.Trait.Functional.Base.IDo;
 using MUS.Entities.Trait.Descriptive.Base.IHave;
+using MUS.Entities.Trait.Functional.Base.IDo;
 
 namespace MUS.Entities.Items.Usables.Weapons
 {
