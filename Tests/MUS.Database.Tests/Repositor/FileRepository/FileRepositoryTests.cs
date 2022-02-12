@@ -10,7 +10,7 @@ namespace MUS.Database.Tests.Repositor.FileRepository
     [TestFixture]
     public class FileRepositoryTests
     {
-        class MockGameObject : IDatabaseObject { }
+        class MockGameObject : IDatabaseObject { public long Id { get; set; } }
         [Test]
         public void TestGetAll_DoesntError()
         {

@@ -1,8 +1,9 @@
 ﻿using MUS.Common.Interfaces;
+using MUS.Common.Interfaces.EntityInterfaces;
 
 namespace MUS.Entities.Base
 {
-    public abstract class GameObject : IDatabaseObject
+    public abstract class GameObject : IGameObject
     {
         /// <summary>
         /// Name of the Game Object. This is the human-readable id of the game object in question.

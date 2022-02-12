@@ -1,9 +1,10 @@
-﻿using MUS.Entities.Base;
+﻿using MUS.Common.Interfaces;
+using MUS.Entities.Base;
 
 namespace MUS.Entities.Items
 {
-    public class Item : GameObject
+    public class Item : GameObject, IDatabaseObject
     {
-        public long ItemId { get; set; }
+        public long Id { get; set; }
     }
 }

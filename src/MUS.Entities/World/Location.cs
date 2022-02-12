@@ -1,10 +1,11 @@
-﻿using MUS.Entities.Base;
+﻿using MUS.Common.Interfaces.EntityInterfaces;
+using MUS.Entities.Base;
 
 
 namespace MUS.Entities.World
 {
-    public class Location : GameObject
+    public class Location : GameObject, ILocation
     {
-        public int LocationId { get; set; }
+        public long Id { get; set; }
     }
 }

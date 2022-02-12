@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MUS.Common.Interfaces
+namespace MUS.Common.Interfaces.EntityInterfaces
 {
-    public interface IDatabaseObject
+    public interface ILocation : IGameObject, IDatabaseObject
     {
-        public long Id { get; set; }
     }
 }

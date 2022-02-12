@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace MUS.Entities.Trait.Descriptive.Races
 {
     [Adjective("Race", "Species", "Kin")]
-    public abstract class Race : IDatabaseObject, ICanBeVulnerable
+    public abstract class Race : ICanBeVulnerable
     {
         /// <summary>
         /// Name of the race.

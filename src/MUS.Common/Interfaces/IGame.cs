@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MUS.Common.Interfaces.EntityInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,9 @@ namespace MUS.Common.Interfaces
     /// </summary>
     public interface IGame
     {
+        void LoadCharacter(long playerCharacterId);
+        void UnloadCharacter(long playerCharacterId);
+        void LoadLocation(long locationId);
+        void UnloadLocation(long locationId);
     }
 }
