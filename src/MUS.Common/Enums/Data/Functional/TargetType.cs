@@ -15,7 +15,8 @@ namespace MUS.Common.Enums.Data.Functional
         Actor = 4,
         Weapon = 8,
         Consumable = 16,
-        Vehicle = 32
+        Vehicle = 32,
+        Menu = 64,
 
     }
 }
