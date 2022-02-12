@@ -1,5 +1,4 @@
-﻿using System;
-using MUS.Database.Repositor.Base.Interface;
+﻿using MUS.Database.Repositor.Base.Interface;
 using MUS.Database.Repositor.FileRepository;
 using System.IO;
 using NUnit.Framework;

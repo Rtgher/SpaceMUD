@@ -8,7 +8,7 @@ using MUS.Common.Tools.Attributes.Parser;
 namespace MUS.Entities.Base.Actor
 {
     [Noun(Common.Enums.Data.Functional.TargetType.Actor, "Actor", "Person", "Character", "Char", "C")]
-    public class BaseActor : GameObject, IHaveHeight, ICanBePickedUpIfImDead
+    public class BaseActor : Entity, IHaveHeight, ICanBePickedUpIfImDead
     {
         public IHeight Height { get; private set; }
         public IWeight Weight { get; private set; }

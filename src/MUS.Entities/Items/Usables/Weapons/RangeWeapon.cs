@@ -7,7 +7,7 @@ using MUS.Entities.Trait.Descriptive.Base.IHave;
 
 namespace MUS.Entities.Items.Usables.Weapons
 {
-    [Noun(TargetType.Actor | TargetType.Item | TargetType.Vehicle, "Gun", "range weapon", "ranged weapon", "rw")]
+    [Noun(TargetType.Actor | TargetType.Item | TargetType.Vehicle, "gun", "range weapon", "ranged weapon", "rw")]
     public class RangeWeapon : MeleeWeapon, IHaveAmmo
     {
         public IEnumerable<IAmmo> Magazines { get; } = new List<IAmmo>();

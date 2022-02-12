@@ -8,7 +8,7 @@ using MUS.Common.Tools.Attributes.Parser;
 namespace MUS.Entities.Items
 {
     [Noun(TargetType.PickableItem, "object", "item", "thing")]
-    public class PickableItem : GameObject, ICanBePickedUp
+    public class PickableItem : Item, ICanBePickedUp
     {
         public IDoBePickedUp DoCanBePickedUp { get; private set; }
 
