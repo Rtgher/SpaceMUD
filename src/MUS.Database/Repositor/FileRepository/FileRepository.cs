@@ -77,7 +77,7 @@ namespace MUS.Database.Repositor.FileRepository
         {
             var filePath = $"{EntityFolder.FullName}\\{id}.{FileFormatEnding}";
             FileInfo fileInfo = new FileInfo(filePath);
-            if (!fileInfo.Exists) throw new MUDDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
+            if (!fileInfo.Exists) throw new MUSDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
             using (var fileReader = new StreamReader(filePath))
             {
                 var deserialised = fileReader.ReadToEnd();
@@ -89,7 +89,7 @@ namespace MUS.Database.Repositor.FileRepository
         {
             var filePath = $"{EntityFolder.FullName}\\{id}.{FileFormatEnding}";
             FileInfo fileInfo = new FileInfo(filePath);
-            if (!fileInfo.Exists) throw new MUDDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
+            if (!fileInfo.Exists) throw new MUSDatabaseNoDataException($"Could not find the requested data. Searched for obj id '{id}' in {EntityName} file database.");
             using (var fileReader = new StreamReader(filePath))
             {
                 var deserialised = await fileReader.ReadToEndAsync();
