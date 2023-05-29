@@ -5,6 +5,7 @@ using System;
 using MUS.Common.Commands.Base;
 using MUS.Common.Commands.Configuration;
 using MUS.Common.Enums.Parser;
+using MUS.Common.Exceptions.Parser;
 
 namespace MUS.CommandParser.Tests.TreeParser
 {
@@ -90,5 +91,22 @@ namespace MUS.CommandParser.Tests.TreeParser
             Assert.AreEqual("testPassword", createAccCommand.ProcessedData.UnEncodedPassword);
         }
 
+        [Test]
+        public void TestTreeParser_SentenceWithTwoVerbs_FailsParsingWithError()
+        {
+            string command = "create login blah blag";
+            var parser = DependencyContainer.Provider.GetService(typeof(ICommandParser)) as ICommandParser;
+            InvalidSyntaxException ise = null;
+            try
+            {
+                var parsedCommand = parser.ParseCommand(command);
+            }
+            catch(InvalidSyntaxException err)
+            {
+                ise = err;
+            }
+
+            Assert.IsNotNull(ise);
+        }
     }
 }
