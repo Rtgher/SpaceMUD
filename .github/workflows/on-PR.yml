@@ -13,5 +13,5 @@ jobs:
         uses: actions/setup-dotnet@v3        
         with:
           dotnet-version: 7.x
-      - run: dotnet test    
+      - run: dotnet test --filter TestCategory!="local"
       
