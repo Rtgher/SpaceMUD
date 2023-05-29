@@ -1,11 +1,4 @@
-﻿using MUS.Common.Interfaces.EntityInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MUS.Common.Interfaces
+﻿namespace MUS.Common.Interfaces
 {
     /// <summary>
     /// A blank interface to denote a game/application. 
