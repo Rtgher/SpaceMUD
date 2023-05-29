@@ -43,7 +43,7 @@ namespace MUS.Common.Tools.Extensions
         {
             var type = value.GetType();
             var memberInfo = type.GetMember(value.ToString());
-            if (memberInfo.IsFixedSize == null || memberInfo.Length == 0)
+            if (memberInfo.Length == 0)
             {
                 throw new MissingMemberException($"Member info of class type {type.Name} : {type.Namespace} has no values.");
             }

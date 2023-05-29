@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MUS.Common.Exceptions.Database;
+﻿using MUS.Common.Exceptions.Database;
 using MUS.Common.Interfaces;
 using MUS.Entities.Actors.Player;
 using MUS.Entities.LinkObjects;
@@ -46,7 +45,11 @@ namespace MUS.GameDriver
             {
                 var location = Database.Repositor.DependencyContainer.GetRepositoryFor<Location>().GetSingle(locationId);
                 LoadedLocations.Add(location.Load());
+
+                return true;
             }
+
+            return false;
         }
 
         public void UnloadCharacter(long playerCharacterId)

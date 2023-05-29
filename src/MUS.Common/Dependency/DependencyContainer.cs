@@ -3,7 +3,6 @@ using System;
 using MUS.Common.Logging;
 using MUS.Common.Tools;
 using MUS.Common.Interfaces;
-using Microsoft.Extensions.Hosting;
 
 namespace MUS.Common.Dependency
 {
@@ -11,7 +10,6 @@ namespace MUS.Common.Dependency
     {
         private static IServiceCollection _services = new ServiceCollection();
         private static IServiceProvider _provider;
-        private static IHostBuilder _hostBuilder;   
         public static IServiceProvider Provider => _provider = _provider ?? _services.ConfigureServiceForLogger().BuildServiceProvider();
                                                                    
 

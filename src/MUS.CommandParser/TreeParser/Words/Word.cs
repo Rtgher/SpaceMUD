@@ -20,10 +20,15 @@ namespace MUS.CommandParser.TreeParser.Words
         public override bool Equals(object obj)
         {
             if (this == null && obj == null) return true;
+            var other = obj as Word;
             if (this == null || obj == null) return false;
-            var other = (Word)obj;
 
             return PartOfSpeechType == other.PartOfSpeechType && (Value == other.Value || Attribute.Synonyms.Contains<string>(other.Value));
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

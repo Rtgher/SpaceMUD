@@ -39,7 +39,6 @@ namespace MUS.CommandParser.TreeParser.Node
                     {
                         case WordTypeEnum.Verb:
                             throw new InvalidSyntaxException($"Cannot parse two verbs one after the other. Attempted to Parse {node?.Content?.Value} after {Content?.Value}.");
-                            break;
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adjective:
                         case WordTypeEnum.Preposition:
@@ -51,7 +50,6 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
-                            break;
                         case WordTypeEnum.Equalizer:
                             AddToRight(node);
                             break;
@@ -73,7 +71,6 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Equalizer:
                             SetAsParent(node);
                             return Parent;
-                            break;
                     }
                     break;
                 case WordTypeEnum.Adverb:
@@ -82,7 +79,6 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Verb:
                             SetAsParent(node);
                             return Parent;
-                            break;
                         case WordTypeEnum.Noun:
                         case WordTypeEnum.Adverb:
                         case WordTypeEnum.Adjective:
@@ -93,7 +89,6 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Equalizer:
                             SetAsParent(node);
                             return Parent;
-                            break;
                     }
                     break;
                 case WordTypeEnum.Adjective:
@@ -107,7 +102,6 @@ namespace MUS.CommandParser.TreeParser.Node
                                 AddToRight(node);
                             else SetAsParent(node);
                             return Parent;
-                            break;
                         case WordTypeEnum.Adverb:
                             AddToLeft(node);
                             break;
@@ -142,7 +136,6 @@ namespace MUS.CommandParser.TreeParser.Node
                             throw new InvalidSyntaxException("Cannot have a Conjunction after a preposition!");
                         case WordTypeEnum.Equalizer:
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after a preposition!");
-                            break;
                     }
                     break;
                 case WordTypeEnum.Conjuction:
@@ -168,10 +161,8 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Conjuction:
                             SetAsParent(node);
                             return Parent;
-                            break;
                         case WordTypeEnum.Equalizer:
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after a conjunction!");
-                            break;
                     }
                     break;
                 case WordTypeEnum.Equalizer:
@@ -188,7 +179,6 @@ namespace MUS.CommandParser.TreeParser.Node
                         case WordTypeEnum.Conjuction:
                             if (Right != null) { Right.AddNode(node); break; }
                             throw new InvalidSyntaxException("Cannot have an conjunction after an equalizer symbol!");
-                            break;
                         case WordTypeEnum.Equalizer:
                             if (Right != null)
                             {
@@ -196,7 +186,6 @@ namespace MUS.CommandParser.TreeParser.Node
                                 break;
                             }
                             throw new InvalidSyntaxException("Cannot have an equalizer symbol after an equalizer symbol! Expecting full 'item=value' syntax!'");
-                            break;
                     }
                     break;
             }
