@@ -12,6 +12,7 @@ namespace MUS.Database.Tests.Repositor.FileRepository
     {
         class MockGameObject : IDatabaseObject { public long Id { get; set; } }
         [Test]
+        [Category("local")]
         public void TestGetAll_DoesntError()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
@@ -20,6 +21,7 @@ namespace MUS.Database.Tests.Repositor.FileRepository
         }
 
         [Test]
+        [Category("local")]
         public void TestFileRepository_CreatesFolders()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
@@ -31,6 +33,8 @@ namespace MUS.Database.Tests.Repositor.FileRepository
         }
 
         [Test]
+        [Category("local")]
+
         public void TestFileRepository_InsertCreatesFile()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
@@ -41,6 +45,8 @@ namespace MUS.Database.Tests.Repositor.FileRepository
         }
 
         [Test]
+        [Category("local")]
+
         public void TestFileRepository_GetAllReturnsallFiles()
         {
             IRepository<MockGameObject> repo = new FileRepository<MockGameObject>();
