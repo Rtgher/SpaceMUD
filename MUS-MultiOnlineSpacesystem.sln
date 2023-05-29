@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B9FC2BC-3A8D-45E5-95BB-DA0CD5639C9F}"
 	ProjectSection(SolutionItems) = preProject
 		License.txt = License.txt
+		.github\workflows\on-PR.yml = .github\workflows\on-PR.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A65A81CF-18BC-4AB6-AA3E-16DB9EEDA6AE}"
